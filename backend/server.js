@@ -102,8 +102,8 @@ function servirArchivoWeb(req, res, rutaRelativa) {
   fs.createReadStream(rutaArchivo).pipe(res);
 }
 
-// 5. Enrutador principal de la API REST y Plataforma Web
-const servidor = http.createServer(async (req, res) => {
+// 5. Manejador de peticiones HTTP (compatible con Node local y Serverless de Vercel)
+async function manejadorPrincipal(req, res) {
   if (req.method === 'OPTIONS') {
     return responderJson(res, 200, { ok: true });
   }
@@ -242,23 +242,31 @@ const servidor = http.createServer(async (req, res) => {
   } catch (error) {
     return responderJson(res, 500, { error: 'Error interno del servidor: ' + error.message });
   }
-});
+}
 
-// 6. Arranco el servidor API + Web y conecto con Firebase
-servidor.listen(PUERTO, '0.0.0.0', () => {
-  const ipLocal = obtenerIpLocal();
-  try {
-    const rutaUrlApp = path.join(__dirname, '..', 'src', 'config', 'servidorUrl.js');
-    fs.writeFileSync(
-      rutaUrlApp,
-      `// Generado automáticamente al iniciar el servidor backend (npm run api)\nexport const SERVIDOR_API_URL = 'http://${ipLocal}:${PUERTO}';\n`,
-      'utf8'
-    );
-  } catch (e) {}
-  console.log('====================================================');
-  console.log('🚀 TicketLab Servidor API + Web (Fases 1 a 6 listas)');
-  console.log('💻 Plataforma Web en PC: http://localhost:' + PUERTO);
-  console.log('📱 URL para App Móvil:   http://' + ipLocal + ':' + PUERTO);
-  console.log('====================================================');
+const servidor = http.createServer(manejadorPrincipal);
+
+// 6. Arranco el servidor API + Web si se ejecuta localmente (en Vercel exportamos el handler)
+if (process.env.VERCEL) {
   conectarServicioFirebase();
-});
+} else {
+  servidor.listen(PUERTO, '0.0.0.0', () => {
+    const ipLocal = obtenerIpLocal();
+    try {
+      const rutaUrlApp = path.join(__dirname, '..', 'src', 'config', 'servidorUrl.js');
+      fs.writeFileSync(
+        rutaUrlApp,
+        `// Generado automáticamente al iniciar el servidor backend (npm run api)\nexport const SERVIDOR_API_URL = 'http://${ipLocal}:${PUERTO}';\n`,
+        'utf8'
+      );
+    } catch (e) {}
+    console.log('====================================================');
+    console.log('🚀 TicketLab Servidor API + Web (Fases 1 a 6 listas)');
+    console.log('💻 Plataforma Web en PC: http://localhost:' + PUERTO);
+    console.log('📱 URL para App Móvil:   http://' + ipLocal + ':' + PUERTO);
+    console.log('====================================================');
+    conectarServicioFirebase();
+  });
+}
+
+module.exports = manejadorPrincipal;
