@@ -20,8 +20,21 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES"
+      ]
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "TicketLab necesita acceso a la cámara para tomar fotos de los daños.",
+          "photosPermission": "TicketLab necesita acceso a tus fotos para adjuntar evidencia de los daños."
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }

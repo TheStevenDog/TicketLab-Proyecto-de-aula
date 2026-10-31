@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TicketLab Campus — Consola Web &amp; Diagnóstico TI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#edeef0",
+            "status-warning-amber": "#D97706",
+            "primary-fixed-dim": "#b6c4ff",
+            "surface-container-low": "#f3f4f6",
+            "secondary": "#006a63",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#92a7ff",
+            "priority-high-red": "#DC2626",
+            "on-background": "#191c1e",
+            "on-primary-container": "#90a8ff",
+            "text-primary": "#0F172A",
+            "border-subtle": "#E5E7EB",
+            "on-tertiary": "#ffffff",
+            "outline": "#757682",
+            "campus-emerald-medium": "#115E59",
+            "on-primary-fixed": "#00164e",
+            "secondary-fixed": "#9cf2e8",
+            "on-secondary-fixed-variant": "#00504a",
+            "primary-container": "#1e3a8a",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#444651",
+            "on-secondary-container": "#006f67",
+            "text-muted": "#64748B",
+            "surface-bright": "#f8f9fb",
+            "on-error": "#ffffff",
+            "priority-resolved-green": "#16A34A",
+            "campus-emerald-dark": "#064E3B",
+            "campus-surface-alt": "#F8FAFC",
+            "surface-container-highest": "#e1e2e4",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#99efe5",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#dce1ff",
+            "campus-card-bg": "#FFFFFF",
+            "on-primary": "#ffffff",
+            "primary": "#00236f",
+            "on-primary-fixed-variant": "#264191",
+            "background": "#f8f9fb",
+            "surface-container-high": "#e7e8ea",
+            "secondary-fixed-dim": "#80d5cb",
+            "outline-variant": "#c5c5d3",
+            "status-offline-amber": "#B45309",
+            "surface": "#f8f9fb",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#191c1e",
+            "on-secondary-fixed": "#00201d"
+          },
+          fontFamily: {
+            "headline": ["Manrope", "sans-serif"],
+            "body": ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="bg-background font-body text-on-surface antialiased min-h-screen">
+
+  <!-- =========================================================================
+       1. PANTALLA DE LOGIN Y REGISTRO JWT (Diseño Stitch: login_y_registro_jwt)
+       ========================================================================= -->
+  <div id="vistaLogin" class="min-h-screen flex items-center justify-center p-4 bg-surface">
+    <div class="w-full max-w-md flex flex-col pb-6">
+      <!-- Status Indicator: Campus Network Connectivity -->
+      <div class="w-full bg-primary text-on-primary py-2 px-3.5 rounded-lg flex items-center justify-between shadow-sm mb-4">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-priority-resolved-green animate-pulse"></span>
+          <span class="text-xs font-semibold tracking-tight">En línea · API Gateway v2.4</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-campus-emerald-medium text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+          <span class="material-symbols-outlined text-[13px]">wifi</span>
+          <span>JWT Activo</span>
+        </div>
+      </div>
+
+      <!-- Hero Institutional Brand Header -->
+      <div class="flex flex-col items-center justify-center text-center pt-1 pb-4">
+        <div class="relative w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center mb-3 shadow-md">
+          <span class="material-symbols-outlined text-campus-emerald-dark text-4xl">school</span>
+          <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-secondary"></span>
+          </span>
+        </div>
+        <div class="flex items-center justify-center gap-1.5">
+          <h1 class="font-headline text-3xl font-bold text-primary tracking-tight">TicketLab</h1>
+          <span class="bg-secondary text-white text-xs font-bold px-2 py-0.5 rounded-md">Campus</span>
+        </div>
+        <p class="text-sm text-text-muted mt-1">
+          Mesa de ayuda e infraestructura técnica universitaria
+        </p>
+      </div>
+
+      <!-- Role Quick Preview Pill Matrix -->
+      <div class="bg-surface-container-low rounded-xl p-3.5 mb-4 shadow-sm border border-border-subtle">
+        <div class="flex items-center justify-between mb-2.5">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-status-warning-amber text-[18px]">bolt</span>
+            <span class="text-xs font-bold text-text-primary uppercase tracking-wider">Acceso rápido por Rol</span>
+          </div>
+          <span class="text-[10px] text-campus-emerald-medium font-bold bg-white px-2 py-0.5 rounded shadow-sm">DEMO / 1 CLIC</span>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <button type="button" id="demoBtn_estudiante" onclick="loginDemo('estudiante@ticketlab.com', 'estudiante')" class="role-btn bg-white hover:bg-secondary-container text-on-surface p-2 rounded-lg flex flex-col items-center justify-center transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-campus-emerald-medium mb-1">school</span>
+            <span class="text-[11px] font-bold">Estudiante</span>
+            <span class="text-[9px] text-text-muted">Nivel 1</span>
+          </button>
+          <button type="button" id="demoBtn_soporte" onclick="loginDemo('soporte@ticketlab.com', 'soporte')" class="role-btn bg-white hover:bg-secondary-container text-on-surface p-2 rounded-lg flex flex-col items-center justify-center transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-campus-emerald-medium mb-1">build</span>
+            <span class="text-[11px] font-bold">Soporte</span>
+            <span class="text-[9px] text-text-muted">Nivel 2</span>
+          </button>
+          <button type="button" id="demoBtn_lider" onclick="loginDemo('lider@ticketlab.com', 'lider')" class="role-btn bg-secondary text-white p-2 rounded-lg flex flex-col items-center justify-center transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-secondary-fixed mb-1">assignment</span>
+            <span class="text-[11px] font-bold">Líder</span>
+            <span class="text-[9px] text-secondary-fixed">Nivel 3</span>
+          </button>
+          <button type="button" id="demoBtn_admin" onclick="loginDemo('admin@ticketlab.com', 'admin')" class="role-btn bg-white hover:bg-secondary-container text-on-surface p-2 rounded-lg flex flex-col items-center justify-center transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-campus-emerald-medium mb-1">shield_person</span>
+            <span class="text-[11px] font-bold">Admin</span>
+            <span class="text-[9px] text-text-muted">Nivel 4</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Authentication Form Container -->
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-md border border-border-subtle flex flex-col gap-4">
+        <!-- Tab Selector -->
+        <div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-xl">
+          <button type="button" id="tabLoginMode" onclick="establecerModoAuth(false)" class="py-2 rounded-lg text-xs font-bold text-center transition-all bg-white text-campus-emerald-dark shadow-sm">
+            Iniciar Sesión
+          </button>
+          <button type="button" id="tabRegisterMode" onclick="establecerModoAuth(true)" class="py-2 rounded-lg text-xs font-bold text-center transition-all text-text-muted hover:text-text-primary">
+            Crear Cuenta
+          </button>
+        </div>
+
+        <!-- Active Form Context Notice -->
+        <div class="bg-secondary-container text-campus-emerald-dark px-3 py-2 rounded-lg flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">verified_user</span>
+            <span class="text-[11px] font-bold uppercase" id="roleContextBannerText">AUTENTICACIÓN CENTRALIZADA JWT</span>
+          </div>
+          <span class="text-[10px] font-bold text-campus-emerald-medium">HS256</span>
+        </div>
+
+        <!-- Register Extra Fields -->
+        <div id="bloqueNombreRegistro" class="oculto flex flex-col gap-3">
+          <div>
+            <label class="block text-[10px] font-bold text-text-muted uppercase mb-1">Nombre Completo</label>
+            <div class="flex items-center bg-surface-container-low px-3 py-2.5 rounded-lg">
+              <span class="material-symbols-outlined text-outline text-[20px] mr-2">badge</span>
+              <input type="text" id="inputNombre" placeholder="Ej. Juan Pérez García" class="w-full bg-transparent outline-none text-sm text-text-primary" />
+            </div>
+          </div>
+          <div id="bloqueRolRegistro">
+            <label class="block text-[10px] font-bold text-text-muted uppercase mb-1">Rol Institucional</label>
+            <div class="flex items-center bg-surface-container-low px-3 py-2.5 rounded-lg">
+              <span class="material-symbols-outlined text-outline text-[20px] mr-2">admin_panel_settings</span>
+              <select id="inputRolRegistro" class="w-full bg-transparent outline-none text-sm text-text-primary">
+                <option value="estudiante">Estudiante / Usuario (Nivel 1)</option>
+                <option value="soporte">Soporte Técnico (Nivel 2)</option>
+                <option value="lider">Líder de Soporte (Nivel 3)</option>
+                <option value="admin">Administrador (Nivel 4)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Login Fields -->
+        <div class="flex flex-col gap-3.5">
+          <div>
+            <label class="block text-[10px] font-bold text-text-muted uppercase mb-1">Correo Electrónico Institucional</label>
+            <div class="flex items-center bg-surface-container-low px-3 py-2.5 rounded-lg">
+              <span class="material-symbols-outlined text-outline text-[20px] mr-2">mail</span>
+              <input type="email" id="inputEmail" placeholder="usuario@ticketlab.com" value="lider@ticketlab.com" class="w-full bg-transparent outline-none text-sm text-text-primary" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-text-muted uppercase mb-1">Contraseña</label>
+            <div class="flex items-center bg-surface-container-low px-3 py-2.5 rounded-lg relative">
+              <span class="material-symbols-outlined text-outline text-[20px] mr-2">lock</span>
+              <input type="password" id="inputClave" placeholder="••••••••" value="123456" class="w-full bg-transparent outline-none text-sm text-text-primary" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Action: Ingresar con JWT -->
+        <button type="button" id="btnSubmitAuth" onclick="procesarAuth()" class="w-full bg-secondary hover:bg-campus-emerald-medium text-white py-3 px-4 rounded-xl font-headline font-bold text-base flex items-center justify-center gap-2 shadow-md transition-all">
+          <span class="material-symbols-outlined text-[20px]">login</span>
+          <span id="txtSubmitAuth">Ingresar con JWT</span>
+        </button>
+      </div>
+
+      <!-- Campus Support Badge Card -->
+      <div class="mt-4 bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between border border-border-subtle">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-[20px]">support_agent</span>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-text-primary">Mesa de Ayuda Presencial</h4>
+            <p class="text-xs text-text-muted">Bloque 3 · Lab Central Piso 1</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 bg-surface-container px-2.5 py-1 rounded-md text-primary text-[11px] font-bold">
+          <span class="material-symbols-outlined text-[14px]">phone_in_talk</span>
+          <span>Ext. 4100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. CONSOLA WEB PRINCIPAL (Diseño Stitch: panel_de_reportes_web)
+       ========================================================================= -->
+  <div id="vistaApp" class="oculto min-h-screen bg-background">
+    <!-- Left Persistent Sidebar -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest border-r border-border-subtle shadow-sm z-50 flex flex-col justify-between">
+      <div class="flex flex-col">
+        <div class="h-16 px-4 flex items-center gap-3 border-b border-surface-container-low">
+          <div class="w-9 h-9 rounded-xl bg-secondary-container flex items-center justify-center text-campus-emerald-dark font-bold">
+            <span class="material-symbols-outlined text-[22px]">school</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-headline font-bold text-lg text-primary leading-none">TicketLab</span>
+            <span class="text-[10px] font-bold text-secondary tracking-wider mt-1">CAMPUS SOPORTE</span>
+          </div>
+        </div>
+
+        <div class="px-4 py-3">
+          <div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-priority-resolved-green animate-pulse"></span>
+              <span class="text-[10px] text-on-surface-variant font-bold">API JWT CONECTADO</span>
+            </div>
+            <span class="text-[10px] text-campus-emerald-medium font-bold">v2.4</span>
+          </div>
+        </div>
+
+        <nav class="px-4 py-2 flex flex-col gap-1.5">
+          <button type="button" id="tabBtn_tickets" onclick="cambiarTab('tickets')" class="nav-item activo flex items-center justify-between px-4 py-2.5 rounded-xl font-semibold text-sm transition-all">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+              <span>Tickets y Cámara</span>
+            </div>
+            <span id="badgeSidebarTickets" class="text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded-full">0</span>
+          </button>
+
+          <button type="button" id="tabBtn_reportes" onclick="cambiarTab('reportes')" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-high transition-all">
+            <span class="material-symbols-outlined text-[20px]">bar_chart</span>
+            <span>Reportes de Daños</span>
+          </button>
+
+          <button type="button" id="tabBtn_equipos" onclick="cambiarTab('equipos')" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-high transition-all">
+            <span class="material-symbols-outlined text-[20px]">devices</span>
+            <span>Equipos Soporte</span>
+          </button>
+
+          <button type="button" id="tabBtn_usuarios" onclick="cambiarTab('usuarios')" class="nav-item oculto flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-high transition-all">
+            <span class="material-symbols-outlined text-[20px]">group</span>
+            <span>Usuarios y Roles</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-4 flex flex-col gap-3">
+        <div class="bg-campus-surface-alt border border-border-subtle rounded-xl p-4 flex flex-col items-center text-center">
+          <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary mb-2">
+            <span class="material-symbols-outlined text-[22px]">verified_user</span>
+          </div>
+          <span class="font-headline font-bold text-xs text-text-primary">Red Campus Central</span>
+          <p id="ayudaJerarquia" class="text-[11px] text-text-muted mt-1 leading-relaxed"></p>
+        </div>
+        <button type="button" onclick="cerrarSesion()" class="w-full py-2 px-3 rounded-lg bg-error-container text-on-error-container font-bold text-xs flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity">
+          <span class="material-symbols-outlined text-[16px]">logout</span>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Stage Content -->
+    <div class="pl-64">
+      <!-- Fixed Top Header -->
+      <header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/95 backdrop-blur-xl border-b border-border-subtle z-40 flex items-center justify-between px-6">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-text-muted">Sistema</span>
+          <span class="text-xs text-outline-variant">/</span>
+          <span class="text-xs font-semibold text-secondary">Operaciones TI</span>
+          <span class="text-xs text-outline-variant">/</span>
+          <span id="headerBreadcrumbTitulo" class="font-headline font-bold text-base text-primary">Consola Central de Incidencias</span>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-semibold">
+            <span class="material-symbols-outlined text-[16px] text-campus-emerald-medium">wifi_tethering</span>
+            <span>Sincronizado con Firebase</span>
+          </div>
+
+          <div class="flex items-center gap-3 pl-3 border-l border-border-subtle">
+            <div class="flex flex-col text-right">
+              <span id="txtUsuarioActual" class="text-xs font-bold text-text-primary leading-tight"></span>
+              <span id="badgeRolActual" class="text-[10px] font-bold uppercase text-campus-emerald-medium leading-tight"></span>
+            </div>
+            <div id="avatarInicialesHeader" class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-xs">
+              TL
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="w-full pt-20 px-6 pb-12">
+        <!-- KPI SUMMARY ROW (Siempre visible en la parte superior del Dashboard) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+          <div class="relative overflow-hidden bg-gradient-to-br from-campus-emerald-dark to-campus-emerald-medium text-on-primary rounded-xl p-4 shadow-md flex flex-col justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">build</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold text-secondary-fixed uppercase tracking-wider">Total de Daños</p>
+                <h3 id="kpiTotalTickets" class="font-headline text-2xl font-bold leading-none mt-1">0</h3>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-secondary-container font-semibold">
+              <span>Campus Activo</span>
+              <span>Tiempo Real</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-text-muted tracking-wider">BLOQUE 1</span>
+              <span class="material-symbols-outlined text-secondary text-[20px]">corporate_fare</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-2">
+              <h3 id="kpiBloque1" class="font-headline text-2xl font-bold text-text-primary">0</h3>
+              <span class="text-[10px] text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">Aulas/Labs</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-text-muted tracking-wider">BLOQUE 2</span>
+              <span class="material-symbols-outlined text-secondary text-[20px]">apartment</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-2">
+              <h3 id="kpiBloque2" class="font-headline text-2xl font-bold text-text-primary">0</h3>
+              <span class="text-[10px] text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">Audiovisual</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-text-muted tracking-wider">BLOQUE 3</span>
+              <span class="material-symbols-outlined text-secondary text-[20px]">domain</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-2">
+              <h3 id="kpiBloque3" class="font-headline text-2xl font-bold text-text-primary">0</h3>
+              <span class="text-[10px] text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">Cómputo</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-text-muted tracking-wider">BLOQUE 4</span>
+              <span class="material-symbols-outlined text-secondary text-[20px]">location_city</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-2">
+              <h3 id="kpiBloque4" class="font-headline text-2xl font-bold text-text-primary">0</h3>
+              <span class="text-[10px] text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">Redes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             PESTAÑA 1: TICKETS Y CÁMARA (Diseño Stitch: tickets_y_c_mara)
+             =============================================================== -->
+        <section id="seccion_tickets" class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+          <!-- Columna izquierda (Col 1-5): Reportar Daño + Cámara Web -->
+          <div class="xl:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm border border-border-subtle overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b border-surface-container-low">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-[20px]">campaign</span>
+                </div>
+                <div>
+                  <h2 class="font-headline font-bold text-base text-text-primary">Reportar Daño</h2>
+                  <p class="text-xs text-text-muted">Apertura inmediata en laboratorio o aula</p>
+                </div>
+              </div>
+              <span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded font-bold uppercase">Activo</span>
+            </div>
+
+            <div class="p-5 flex flex-col gap-4">
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1">Título de la falla <span class="text-priority-high-red">*</span></label>
+                <input type="text" id="tktTitulo" placeholder="Ej. PC 05 no da video" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-primary-container" />
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-bold text-text-primary block mb-1">Bloque o Edificio</label>
+                  <select id="tktBloque" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3 py-2.5 outline-none">
+                    <option value="Bloque 1">Bloque 1</option>
+                    <option value="Bloque 2">Bloque 2</option>
+                    <option value="Bloque 3">Bloque 3</option>
+                    <option value="Bloque 4">Bloque 4</option>
+                    <option value="Biblioteca">Biblioteca</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs font-bold text-text-primary block mb-1">Sala o Aula <span class="text-priority-high-red">*</span></label>
+                  <input type="text" id="tktSala" placeholder="Ej. Sala 204 / Lab 302" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3.5 py-2.5 outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-bold text-text-primary block mb-1">Tipo de Equipo</label>
+                  <select id="tktTipoEquipo" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3 py-2.5 outline-none">
+                    <option value="Computador">Computador</option>
+                    <option value="Proyector">Proyector</option>
+                    <option value="Red">Red</option>
+                    <option value="Periférico">Periférico</option>
+                    <option value="Mobiliario/Aire">Mobiliario/Aire</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs font-bold text-text-primary block mb-1">Prioridad</label>
+                  <select id="tktPrioridad" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3 py-2.5 outline-none">
+                    <option value="baja">Baja</option>
+                    <option value="media" selected>Media</option>
+                    <option value="alta">Alta (Crítico)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1">Descripción detallada del daño <span class="text-priority-high-red">*</span></label>
+                <textarea id="tktDescripcion" rows="3" placeholder="Describe síntomas, pitidos o mensajes de error..." class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg p-3.5 outline-none resize-none"></textarea>
+              </div>
+
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1">Fecha Límite</label>
+                <input type="date" id="tktFechaLimite" class="w-full bg-surface-container-low text-sm text-text-primary rounded-lg px-3.5 py-2 outline-none" />
+              </div>
+
+              <!-- Evidencia Visual: Cámara Web y Galería -->
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1.5">Evidencia Visual (Cámara Web o Archivo)</label>
+                <div class="grid grid-cols-2 gap-2.5">
+                  <button type="button" onclick="iniciarCamaraWeb()" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-secondary text-on-secondary text-xs font-bold shadow-sm hover:opacity-95">
+                    <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+                    <span>Cámara Web</span>
+                  </button>
+                  <label class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary text-xs font-bold cursor-pointer">
+                    <span class="material-symbols-outlined text-[18px]">image</span>
+                    <span>Galería / Archivo</span>
+                    <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="cargarFotoArchivo(event)" />
+                  </label>
+                </div>
+
+                <button type="button" id="btnTomarFotoWeb" onclick="capturarFotoCamaraWeb()" class="oculto mt-2 w-full py-2 rounded-lg bg-primary text-white text-xs font-bold">
+                  📸 Capturar Fotografía Ahora
+                </button>
+                <video id="videoCamara" class="oculto w-full rounded-lg mt-2" autoplay playsinline></video>
+                <canvas id="canvasCamara" class="oculto"></canvas>
+
+                <div id="contenedorPreviewWeb" class="oculto relative rounded-lg overflow-hidden bg-surface-container-high w-36 h-24 shadow-sm mt-2.5">
+                  <img id="previewFoto" class="w-full h-full object-cover" alt="Evidencia" />
+                  <button type="button" onclick="quitarFotoWeb()" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-priority-high-red text-white flex items-center justify-center text-xs font-bold shadow">
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" onclick="crearTicketWeb()" class="w-full mt-1 py-3 px-4 rounded-xl bg-campus-emerald-dark hover:bg-campus-emerald-medium text-white font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all">
+                <span class="material-symbols-outlined text-[18px]">send</span>
+                <span>Enviar Reporte de Daño</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Columna derecha (Col 6-12): Tickets Registrados y Gestión Jerárquica -->
+          <div class="xl:col-span-7 flex flex-col gap-4">
+            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                </div>
+                <h3 id="tituloListaTickets" class="font-headline font-bold text-base text-text-primary">Tickets Registrados</h3>
+              </div>
+              <button type="button" onclick="cargarTicketsWeb()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-xs font-bold text-on-surface-variant">
+                <span class="material-symbols-outlined text-[16px]">refresh</span>
+                <span>Actualizar</span>
+              </button>
+            </div>
+
+            <div id="contenedorListaTickets" class="flex flex-col gap-3.5"></div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             PESTAÑA 2: REPORTES DE DAÑOS (Diseño Stitch: panel_de_reportes_web)
+             =============================================================== -->
+        <section id="seccion_reportes" class="oculto grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+          <!-- Left Panel: Filtros Avanzados (Col 1-4) -->
+          <div class="xl:col-span-4 bg-surface-container-lowest rounded-xl p-5 shadow-sm border border-border-subtle flex flex-col gap-4">
+            <div class="flex items-center justify-between pb-3 border-b border-surface-container-low">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px] text-campus-emerald-dark">filter_alt</span>
+                <h3 class="font-headline font-bold text-base text-text-primary">Filtros Avanzados</h3>
+              </div>
+              <button type="button" onclick="limpiarFiltrosReporte()" class="text-[11px] font-bold text-text-muted hover:text-campus-emerald-dark uppercase">
+                Limpiar
+              </button>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-text-primary block mb-1">Usuario o Solicitante</label>
+              <input type="text" id="repUsuario" placeholder="Buscar por nombre o correo..." class="w-full bg-surface-container-low rounded-lg px-3 py-2 text-sm text-text-primary outline-none" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1">Bloque</label>
+                <select id="repBloque" class="w-full bg-surface-container-low rounded-lg px-3 py-2 text-sm text-text-primary outline-none">
+                  <option value="">Todos</option>
+                  <option value="Bloque 1">Bloque 1</option>
+                  <option value="Bloque 2">Bloque 2</option>
+                  <option value="Bloque 3">Bloque 3</option>
+                  <option value="Bloque 4">Bloque 4</option>
+                  <option value="Biblioteca">Biblioteca</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-text-primary block mb-1">Sala / Aula</label>
+                <input type="text" id="repSala" placeholder="Ej. Sala 204" class="w-full bg-surface-container-low rounded-lg px-3 py-2 text-sm text-text-primary outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-text-primary block mb-1">Tipo de Equipo con falla</label>
+              <select id="repTipoEquipo" class="w-full bg-surface-container-low rounded-lg px-3 py-2 text-sm text-text-primary outline-none">
+                <option value="">Todos los dispositivos</option>
+                <option value="Computador">Computador</option>
+                <option value="Proyector">Proyector</option>
+                <option value="Red">Red</option>
+                <option value="Periférico">Periférico</option>
+                <option value="Mobiliario/Aire">Mobiliario/Aire</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-[11px] font-bold text-text-muted block mb-1">Fecha Desde</label>
+                <input type="date" id="repFechaInicio" class="w-full bg-surface-container-low rounded-lg px-2.5 py-1.5 text-xs text-text-primary outline-none" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold text-text-muted block mb-1">Fecha Hasta</label>
+                <input type="date" id="repFechaFin" class="w-full bg-surface-container-low rounded-lg px-2.5 py-1.5 text-xs text-text-primary outline-none" />
+              </div>
+            </div>
+
+            <button type="button" onclick="consultarReportesWeb()" class="w-full bg-campus-emerald-dark hover:bg-campus-emerald-medium text-white font-bold text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all">
+              <span class="material-symbols-outlined text-[18px]">filter_list</span>
+              <span>Aplicar Filtros</span>
+            </button>
+
+            <div id="contenedorResumenReportes" class="flex flex-col gap-2.5 pt-2"></div>
+          </div>
+
+          <!-- Right Panel: Tabla y Tarjetas de Resultados Filtrados (Col 5-12) -->
+          <div class="xl:col-span-8 flex flex-col gap-4">
+            <div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-subtle flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-[20px]">dataset</span>
+                </div>
+                <div>
+                  <h3 class="font-headline font-bold text-base text-text-primary">Lista de Tickets Filtrados</h3>
+                  <p class="text-xs text-text-muted">Total coincidencias: <strong id="contadorReporte">0</strong> registros</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="contenedorResultadosReporte" class="flex flex-col gap-3"></div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             PESTAÑA 3: EQUIPOS DE SOPORTE (Diseño Stitch: inicio_y_equipos)
+             =============================================================== -->
+        <section id="seccion_equipos" class="oculto grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+          <div class="xl:col-span-5 bg-surface-container-lowest rounded-xl p-5 shadow-sm border border-border-subtle flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[20px]">add_moderator</span>
+                <h3 class="font-headline font-bold text-base text-text-primary">Crear Equipo de Soporte</h3>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold">Líder · Admin</span>
+            </div>
+            <p class="text-xs text-text-muted">Organiza cuadrillas especializadas para asignación directa en tickets de laboratorios.</p>
+
+            <div>
+              <label class="text-xs font-bold text-text-primary block mb-1">Nombre del equipo</label>
+              <input type="text" id="eqNombre" placeholder="Ej. Soporte Redes e Infraestructura" class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-sm outline-none" />
+            </div>
+            <div>
+              <label class="text-xs font-bold text-text-primary block mb-1">Integrantes (correos separados por coma)</label>
+              <input type="text" id="eqIntegrantes" placeholder="soporte@ticketlab.com, diana@ticketlab.com" class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-sm outline-none" />
+            </div>
+            <button type="button" onclick="crearEquipoWeb()" class="w-full mt-1 py-2.5 px-4 rounded-xl bg-campus-emerald-dark hover:bg-campus-emerald-medium text-white font-bold text-sm flex items-center justify-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span>
+              <span>Crear Equipo</span>
+            </button>
+          </div>
+
+          <div class="xl:col-span-7 flex flex-col gap-3">
+            <div class="flex items-center gap-2 px-1">
+              <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+              <h3 class="font-headline font-bold text-base text-text-primary">Equipos de Soporte Activos</h3>
+            </div>
+            <div id="contenedorEquipos" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             PESTAÑA 4: USUARIOS Y ROLES (Diseño Stitch: inicio_y_equipos)
+             =============================================================== -->
+        <section id="seccion_usuarios" class="oculto">
+          <div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm border border-border-subtle">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="material-symbols-outlined text-primary text-[22px]">manage_accounts</span>
+              <div>
+                <h3 class="font-headline font-bold text-base text-text-primary">Usuarios del Sistema y Jerarquía de Roles</h3>
+                <p class="text-xs text-text-muted">Exclusivo Administrador (Nivel 4): Asigna el nivel de permisos jerárquicos.</p>
+              </div>
+            </div>
+            <div id="contenedorUsuariosAdmin" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

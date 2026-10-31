@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&amp;family=Public+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#edeef0", "status-warning-amber": "#D97706", "primary-fixed-dim": "#b6c4ff", "surface-container-low": "#f3f4f6", "secondary": "#006a63", "on-error-container": "#93000a", "on-tertiary-container": "#92a7ff", "priority-high-red": "#DC2626", "on-background": "#191c1e", "on-primary-container": "#90a8ff", "text-primary": "#0F172A", "border-subtle": "#E5E7EB", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#0039b5", "outline": "#757682", "campus-emerald-medium": "#115E59", "on-primary-fixed": "#00164e", "secondary-fixed": "#9cf2e8", "on-secondary-fixed-variant": "#00504a", "primary-container": "#1e3a8a", "error": "#ba1a1a", "inverse-on-surface": "#f0f1f3", "on-surface-variant": "#444651", "inverse-surface": "#2e3132", "on-secondary-container": "#006f67", "text-muted": "#64748B", "surface-bright": "#f8f9fb", "on-tertiary-fixed": "#001551", "on-error": "#ffffff", "priority-resolved-green": "#16A34A", "campus-emerald-dark": "#064E3B", "inverse-primary": "#b6c4ff", "campus-surface-alt": "#F8FAFC", "surface-container-highest": "#e1e2e4", "on-secondary": "#ffffff", "tertiary-container": "#0033a6", "secondary-container": "#99efe5", "error-container": "#ffdad6", "tertiary": "#002173", "primary-fixed": "#dce1ff", "campus-card-bg": "#FFFFFF", "on-primary": "#ffffff", "primary": "#00236f", "surface-variant": "#e1e2e4", "on-primary-fixed-variant": "#264191", "tertiary-fixed-dim": "#b7c4ff", "background": "#f8f9fb", "surface-container-high": "#e7e8ea", "secondary-fixed-dim": "#80d5cb", "outline-variant": "#c5c5d3", "surface-dim": "#d9dadc", "tertiary-fixed": "#dce1ff", "status-offline-amber": "#B45309", "surface": "#f8f9fb", "surface-tint": "#4059aa", "surface-container-lowest": "#ffffff", "on-surface": "#191c1e", "on-secondary-fixed": "#00201d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "1rem", "space-md": "1rem", "gutter-desktop": "1.5rem", "margin-desktop": "2rem", "space-sm": "0.5rem", "gutter": "1rem" }, "fontFamily": { "label-xs": ["Public Sans"], "label-md": ["Public Sans"], "body-md": ["Public Sans"], "headline-sm": ["Manrope"], "headline-xl": ["Manrope"], "body-lg": ["Public Sans"], "headline-lg": ["Manrope"], "label-lg": ["Public Sans"], "body-sm": ["Public Sans"], "headline-xl-mobile": ["Manrope"] }, "fontSize": { "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }] } } } }</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm bg-surface-container-lowest"><img alt="TicketLab Campus Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UI6E0q39x8m7N5VKLib-pY0CXbw-0UVYwN_ZZXTjJddgGY_7TKTVvtDHxV-qVECsnmHwSrbNVEEVpmrqzlW1dIYusAVhxwaXhYBbMD3BN9lbCrAOp8rpBzyEj6M1BMVdbhGpf6RagYXIEDx9SsUgh5FTD6CzyQYFMYV5azbWzh2x5k4t7qOYlSYb1yqSVCenlDtfu0pAXNKFA0joa9jXISAvtD6WAKM2j6VHUa2kzS"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none">TicketLab</span><span class="font-label-xs text-label-xs text-secondary leading-none mt-1">CAMPUS SOPORTE</span></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-priority-resolved-green animate-pulse"></span><span class="font-label-xs text-label-xs text-on-surface-variant font-bold">API JWT CONECTADO</span></div><span class="font-label-xs text-label-xs text-campus-emerald-medium font-semibold">v2.4</span></div></div><nav class="px-space-md py-space-sm flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-label-lg rounded-xl"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="inicio" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span>Inicio</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tickets" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span>Tickets</span></div><span class="font-label-xs text-label-xs bg-surface-container-highest px-2 py-0.5 rounded-full text-on-surface-variant">14</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-all bg-primary-container text-on-primary font-label-lg rounded-xl" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="equipos" href="#"><span class="material-symbols-outlined text-[20px]">devices</span><span>Equipos</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav></div><div class="p-space-md flex flex-col gap-space-sm"><div class="bg-campus-surface-alt rounded-xl p-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col items-center text-center"><div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary mb-2"><span class="material-symbols-outlined text-[22px]">school</span></div><span class="font-headline-sm text-label-md text-text-primary">Red Campus Central</span><p class="font-body-sm text-body-sm text-text-muted mt-1">Infraestructura TI y Mantenimiento Docente</p></div><div class="flex items-center justify-between pt-space-xs"><span class="font-label-xs text-label-xs text-text-muted">Soporte Técnico Universitario</span><span class="font-label-xs text-label-xs text-secondary font-bold">TI-UNIV</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter-desktop"><div class="flex items-center gap-space-sm"><img alt="TicketLab Campus Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UI6E0q39x8m7N5VKLib-pY0CXbw-0UVYwN_ZZXTjJddgGY_7TKTVvtDHxV-qVECsnmHwSrbNVEEVpmrqzlW1dIYusAVhxwaXhYBbMD3BN9lbCrAOp8rpBzyEj6M1BMVdbhGpf6RagYXIEDx9SsUgh5FTD6CzyQYFMYV5azbWzh2x5k4t7qOYlSYb1yqSVCenlDtfu0pAXNKFA0joa9jXISAvtD6WAKM2j6VHUa2kzS"/><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-text-muted">Sistema</span><span class="font-label-md text-label-md text-outline-variant">/</span><span class="font-label-md text-label-md text-secondary font-semibold">Reportes Operativos</span><span class="font-label-md text-label-md text-outline-variant">/</span><span class="font-headline-sm text-headline-sm text-primary">Panel de Reportes de Daños</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant text-body-sm font-body-sm"><span class="material-symbols-outlined text-[18px] text-campus-emerald-medium">wifi_tethering</span><span>Modo Online</span></div><button class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-priority-high-red"></span></button><div class="flex items-center gap-space-sm pl-space-sm bg-surface-container-lowest rounded-xl"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-text-primary leading-tight">Administrador</span><span class="font-label-xs text-label-xs text-text-muted leading-tight">Nivel 4 · TI Global</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span></div></div></header><main class="w-full pt-16 bg-background px-gutter-desktop pb-space-xl"><div class="flex flex-col w-full">
+<!-- Status & Quick Breadcrumb Banner -->
+<div class="mb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-campus-emerald-medium bg-secondary-container/40 px-2 py-0.5 rounded-full font-bold">Módulo de Diagnóstico TI</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-xs text-label-xs text-text-muted">Actualizado hace 2 minutos</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight mt-1">Consola Central de Incidencias</h2>
+</div>
+<!-- Quick Action / Campus Stats Pill Bar -->
+<div class="flex items-center gap-space-sm bg-surface-container-lowest p-1.5 rounded-xl shadow-sm">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high transition-colors" id="toggle-filter-presets">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Agosto 2025</span>
+</button>
+<div class="h-4 w-[1px] bg-surface-container-highest"></div>
+<div class="flex items-center gap-2 px-3 py-1 text-campus-emerald-dark bg-secondary-container/50 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-campus-emerald-medium">sync</span>
+<span class="font-label-xs text-label-xs font-bold">Sincronizado</span>
+</div>
+</div>
+</div>
+<!-- KPI SUMMARY ROW -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md mb-space-lg">
+<!-- Featured Emerald Total Card -->
+<div class="relative overflow-hidden bg-gradient-to-br from-campus-emerald-dark to-campus-emerald-medium text-on-primary rounded-xl p-space-md shadow-md flex flex-col justify-between group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-surface-container-lowest/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest/15 backdrop-blur-sm flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[24px]">build</span>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-secondary-fixed opacity-90 uppercase tracking-wider">Total de Daños</p>
+<h3 class="font-headline-xl text-headline-xl font-bold leading-none mt-1">48</h3>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between border-t border-surface-container-lowest/10">
+<div class="flex items-center gap-1 text-secondary-container font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+4.2% vs Julio</span>
+</div>
+<!-- Sparkline Vector -->
+<svg class="w-16 h-6 text-secondary-fixed opacity-75" fill="none" viewbox="0 0 64 24">
+<path d="M2 18L14 14L28 17L42 8L54 11L62 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+</div>
+<!-- Bloque 1 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">corporate_fare</span>
+</div>
+<svg class="w-12 h-6 text-campus-emerald-medium/60" fill="none" viewbox="0 0 48 24">
+<path d="M2 18L12 12L24 16L36 6L46 4" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="mt-3">
+<p class="font-label-xs text-label-xs text-text-muted font-bold tracking-wider">BLOQUE 1</p>
+<div class="flex items-baseline justify-between mt-1">
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-bold">12</h3>
+<span class="font-label-xs text-label-xs text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">25% campus</span>
+</div>
+</div>
+</div>
+<!-- Bloque 2 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<svg class="w-12 h-6 text-campus-emerald-medium/60" fill="none" viewbox="0 0 48 24">
+<path d="M2 16L14 18L26 10L38 12L46 6" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="mt-3">
+<p class="font-label-xs text-label-xs text-text-muted font-bold tracking-wider">BLOQUE 2</p>
+<div class="flex items-baseline justify-between mt-1">
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-bold">10</h3>
+<span class="font-label-xs text-label-xs text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">21% campus</span>
+</div>
+</div>
+</div>
+<!-- Bloque 3 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">domain</span>
+</div>
+<svg class="w-12 h-6 text-campus-emerald-medium/60" fill="none" viewbox="0 0 48 24">
+<path d="M2 20L12 16L24 14L36 7L46 2" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="mt-3">
+<p class="font-label-xs text-label-xs text-text-muted font-bold tracking-wider">BLOQUE 3</p>
+<div class="flex items-baseline justify-between mt-1">
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-bold">14</h3>
+<span class="font-label-xs text-label-xs text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">29% campus</span>
+</div>
+</div>
+</div>
+<!-- Bloque 4 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">location_city</span>
+</div>
+<svg class="w-12 h-6 text-campus-emerald-medium/60" fill="none" viewbox="0 0 48 24">
+<path d="M2 14L14 16L26 8L36 10L46 5" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="mt-3">
+<p class="font-label-xs text-label-xs text-text-muted font-bold tracking-wider">BLOQUE 4</p>
+<div class="flex items-baseline justify-between mt-1">
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-bold">12</h3>
+<span class="font-label-xs text-label-xs text-campus-emerald-medium bg-surface-container-low px-2 py-0.5 rounded font-semibold">25% campus</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MAIN OPERATIONAL TWO-COLUMN WORKBENCH -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT PANEL: Filtros Avanzados (Col 1-4) -->
+<div class="xl:col-span-4 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-campus-emerald-dark">filter_alt</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Filtros Avanzados</h3>
+</div>
+<button class="font-label-xs text-label-xs text-text-muted hover:text-campus-emerald-dark transition-colors uppercase tracking-wider font-semibold" id="btn-reset-filters">
+          Limpiar
+        </button>
+</div>
+<form class="flex flex-col gap-space-md" id="filter-form" onsubmit="event.preventDefault();">
+<!-- Input Usuario -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary font-semibold flex items-center justify-between">
+<span>Usuario</span>
+<span class="text-text-muted text-[11px] font-normal">Nombre o email</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted text-[18px]">search</span>
+<input class="w-full bg-surface-container-low rounded-lg pl-9 pr-3 py-2 font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="filter-user" placeholder="Buscar por nombre o correo..." type="text"/>
+</div>
+</div>
+<!-- Row: Bloque & Sala/Aula -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary font-semibold">Bloque</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low rounded-lg px-3 py-2 font-body-md text-body-md text-text-primary appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all cursor-pointer" id="filter-block">
+<option value="all">Todos los bloques</option>
+<option value="B1">Bloque 1</option>
+<option value="B2">Bloque 2</option>
+<option value="B3">Bloque 3</option>
+<option value="B4">Bloque 4</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 pointer-events-none text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary font-semibold">Sala / Aula</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low rounded-lg px-3 py-2 font-body-md text-body-md text-text-primary appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all cursor-pointer" id="filter-room">
+<option value="all">Todas</option>
+<option value="S204">Sala 204 (Lab TIC)</option>
+<option value="S101">Sala 101 (Audiovisual)</option>
+<option value="S301">Sala 301 (Redes)</option>
+<option value="S105">Sala 105 (Docencia)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 pointer-events-none text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Select Tipo de Equipo -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary font-semibold">Tipo de Equipo</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low rounded-lg px-3 py-2 font-body-md text-body-md text-text-primary appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all cursor-pointer" id="filter-equipment">
+<option value="all">Todos los dispositivos</option>
+<option value="computador">Computador / Estación</option>
+<option value="proyector">Proyector / Smart Screen</option>
+<option value="red">Switch / AP Red Wi-Fi</option>
+<option value="perifericos">Periféricos / Audio</option>
+<option value="mobiliario">Mobiliario / Clima</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 pointer-events-none text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Rango de Fechas -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Periodo de Reporte</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-text-muted mb-1">Fecha Desde</span>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low rounded-lg px-2.5 py-1.5 font-body-sm text-body-sm text-text-primary focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container" id="date-from" type="date" value="2025-08-01"/>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-text-muted mb-1">Fecha Hasta</span>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low rounded-lg px-2.5 py-1.5 font-body-sm text-body-sm text-text-primary focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container" id="date-to" type="date" value="2025-08-31"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Filter Tags -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-xs text-label-xs text-text-muted uppercase tracking-wider font-bold">Estado Rápido</span>
+<div class="flex flex-wrap gap-1.5">
+<button class="filter-chip active px-2.5 py-1 rounded-md bg-campus-emerald-medium text-on-primary font-label-xs text-label-xs font-semibold shadow-xs" type="button">Todos</button>
+<button class="filter-chip px-2.5 py-1 rounded-md bg-surface-container-low text-text-muted hover:bg-surface-container-high font-label-xs text-label-xs font-semibold" type="button">En Proceso</button>
+<button class="filter-chip px-2.5 py-1 rounded-md bg-surface-container-low text-text-muted hover:bg-surface-container-high font-label-xs text-label-xs font-semibold" type="button">Resueltos</button>
+<button class="filter-chip px-2.5 py-1 rounded-md bg-surface-container-low text-text-muted hover:bg-surface-container-high font-label-xs text-label-xs font-semibold" type="button">Críticos</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="mt-2 w-full bg-campus-emerald-dark hover:bg-campus-emerald-medium active:scale-[0.99] text-on-primary font-label-lg text-label-lg py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all" id="btn-submit-filter" type="button">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Aplicar Filtros</span>
+</button>
+</form>
+<!-- Mini Campus Asset Health Widget -->
+<div class="mt-space-lg p-space-md rounded-xl bg-campus-surface-alt flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-xs text-label-xs text-text-muted uppercase font-bold">Distribución de Equipos</span>
+<span class="font-label-xs text-label-xs text-secondary font-bold">48 Activos</span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Mini Donut SVG -->
+<div class="relative w-14 h-14 flex items-center justify-center shrink-0">
+<svg class="w-14 h-14 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4.5"></path>
+<path class="text-campus-emerald-dark" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="40, 100" stroke-width="4.5"></path>
+<path class="text-status-warning-amber" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="25, 100" stroke-dashoffset="-40" stroke-width="4.5"></path>
+<path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-dashoffset="-65" stroke-width="4.5"></path>
+</svg>
+<span class="material-symbols-outlined absolute text-[18px] text-text-muted">memory</span>
+</div>
+<div class="grid grid-cols-2 gap-x-2 gap-y-1 w-full text-[11px] font-body-sm">
+<span class="flex items-center gap-1 text-text-primary"><span class="w-2 h-2 rounded-full bg-campus-emerald-dark"></span>PC (40%)</span>
+<span class="flex items-center gap-1 text-text-primary"><span class="w-2 h-2 rounded-full bg-status-warning-amber"></span>Proy (25%)</span>
+<span class="flex items-center gap-1 text-text-primary"><span class="w-2 h-2 rounded-full bg-primary-container"></span>Red (20%)</span>
+<span class="flex items-center gap-1 text-text-primary"><span class="w-2 h-2 rounded-full bg-surface-container-highest"></span>Otros (15%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Lista de Tickets Filtrados (Col 5-12) -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<!-- Table Header & Action Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">dataset</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Lista de Tickets Filtrados</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Visualizando 3 de 48 tickets del periodo seleccionado</p>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<!-- Export Button -->
+<button class="flex items-center gap-2 bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md py-2 px-3.5 rounded-lg transition-colors" id="btn-export">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Exportar Reporte</span>
+</button>
+<!-- Refresh Table Button -->
+<button class="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant transition-colors" id="btn-refresh" title="Actualizar">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Tickets Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-text-muted font-label-xs text-label-xs uppercase tracking-wider">
+<th class="py-3.5 px-4 font-bold">Título / Hardware</th>
+<th class="py-3.5 px-3 font-bold">Prioridad</th>
+<th class="py-3.5 px-3 font-bold">Estado</th>
+<th class="py-3.5 px-3 font-bold">Bloque / Sala</th>
+<th class="py-3.5 px-3 font-bold">Usuario</th>
+<th class="py-3.5 px-3 font-bold">Fecha</th>
+<th class="py-3.5 px-4 text-center font-bold">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-md text-body-md text-text-primary" id="tickets-table-body">
+<!-- Row 1: PC 05 no da video -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container-high shrink-0 shadow-xs" data-alt="Close up photograph of a damaged desktop computer monitor in an academic university computer laboratory with diagnostic LED blinking and asset barcode label" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB66xjfkXjBBYaMLLUkCXzTec0rjylnv48qCXbKspicbPxKybWwjz8L50Rp9UrbFDkpGdrGET-YZpXDjXkvNFLQA86jvEEjr80Li1x2FMsp6ycnl8otoYzpRJPwNXLcuj58w8XVcC6Tv2Wd1bpNX784s3BP_9u9HimIZDTbCOqLFXQ6Qa9yCAbuZA1PpVLpzEI1KdERZBfk6KMxOmfwalgXnsNccpSCHcjhn2LIK-w"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-text-primary group-hover:text-campus-emerald-dark transition-colors truncate">PC 05 no da video</span>
+<span class="font-body-sm text-body-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">desktop_windows</span>
+                        Lenovo ThinkCentre M70 · ID #TK-942
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-label-xs font-label-xs font-bold bg-error-container text-priority-high-red">
+                    Alta
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-xs font-label-xs font-semibold bg-primary-fixed text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                    En Proceso
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-text-primary">
+<span class="material-symbols-outlined text-text-muted text-[16px]">location_on</span>
+<span>B1 / S204</span>
+</div>
+<span class="font-label-xs text-label-xs text-text-muted block">Laboratorio TIC</span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-[11px]">
+                      JP
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-text-primary">Juan Pérez</span>
+<span class="font-label-xs text-label-xs text-text-muted">Docente</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap font-body-sm text-body-sm text-text-muted">
+                  2025-08-20
+                </td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-2 rounded-lg bg-surface-container-low hover:bg-secondary-container hover:text-secondary text-text-muted transition-colors" onclick="openTicketDetailModal('TK-942', 'PC 05 no da video', 'Juan Pérez', 'B1 / S204', 'Alta', 'En Proceso', 'La pantalla se queda en negro tras encendido. El ventilador opera a máxima velocidad pero no hay salida HDMI ni DisplayPort.')" title="Ver Detalle Técnico">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Proyector sin imagen -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container-high shrink-0 shadow-xs" data-alt="Ceiling-mounted video projector in an academic classroom showing an orange warning error light on its operational panel during lecture hall inspection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlURQBwxONm0PomSFys9o7El_5uJ4eN4-3Wny_kTyAm0iwyrvalcaKyChcFJpHLrMx2rxlK-DA3T89U5XEgjreQcE-9KrJK6KC_cIjRv_9QKKjmjYbx_vxlP7IY8WU18kTLvp998BJRO4HafBXVaVWCcNQo7bD0KngZkmVoD3XjIa-ZZBgUZ-syEdgQ-sPB5AHvkSNrHDAaT6iRC-4WSwGrqbPFOHUojcdBr7NEMk"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-text-primary group-hover:text-campus-emerald-dark transition-colors truncate">Proyector sin imagen</span>
+<span class="font-body-sm text-body-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+                        Epson PowerLite 2250 · ID #TK-938
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-label-xs font-label-xs font-bold bg-amber-100 text-status-warning-amber">
+                    Media
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-xs font-label-xs font-semibold bg-secondary-container text-campus-emerald-dark">
+<span class="w-1.5 h-1.5 rounded-full bg-priority-resolved-green"></span>
+                    Resuelto
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-text-primary">
+<span class="material-symbols-outlined text-text-muted text-[16px]">location_on</span>
+<span>B2 / S101</span>
+</div>
+<span class="font-label-xs text-label-xs text-text-muted block">Audiovisual</span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-campus-emerald-medium text-on-primary flex items-center justify-center font-bold text-[11px]">
+                      ML
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-text-primary">María López</span>
+<span class="font-label-xs text-label-xs text-text-muted">Coordinación</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap font-body-sm text-body-sm text-text-muted">
+                  2025-08-19
+                </td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-2 rounded-lg bg-surface-container-low hover:bg-secondary-container hover:text-secondary text-text-muted transition-colors" onclick="openTicketDetailModal('TK-938', 'Proyector sin imagen', 'María López', 'B2 / S101', 'Media', 'Resuelto', 'Lámpara de repuesto instalada con éxito por personal de soporte. Calibración HDMI 1 completada.')" title="Ver Detalle Técnico">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Red intermitente -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-lg object-cover bg-surface-container-high shrink-0 shadow-xs" data-alt="Network server rack with Ethernet cables and blinking switch ports showing orange warning diagnostic lights in a university campus server closet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAvbxQMx7zZfldhVJfWNCaMnXlwOVLEZ5C9zrIWVI95NVx9u74Lkxqb7ws43_Qbcyk7pP2b47AwqTeCFmWLYn-bw9nqR5-ZXc380me_zAF-9DBvFBKTtgBxQKUg7UHsTnP6Z1tVfuhgxeR9hAOmA6H6UFkZD72mWorZlX5HNubeyDeb2i3gzW80N3wnelrPruBQtHOkejRdoJoQkiCvSwEzlxW3TXr0jVVgq2rnnk"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-text-primary group-hover:text-campus-emerald-dark transition-colors truncate">Red intermitente</span>
+<span class="font-body-sm text-body-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">router</span>
+                        Cisco Catalyst AP-38 · ID #TK-931
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-label-xs font-label-xs font-bold bg-secondary-container/60 text-campus-emerald-dark">
+                    Baja
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-xs font-label-xs font-semibold bg-primary-fixed-dim/40 text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Asignado
+                  </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-text-primary">
+<span class="material-symbols-outlined text-text-muted text-[16px]">location_on</span>
+<span>B3 / S301</span>
+</div>
+<span class="font-label-xs text-label-xs text-text-muted block">Redes e Infra</span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-[11px]">
+                      CR
+                    </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-text-primary">Carlos Ruiz</span>
+<span class="font-label-xs text-label-xs text-text-muted">Laboratorista</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap font-body-sm text-body-sm text-text-muted">
+                  2025-08-18
+                </td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-2 rounded-lg bg-surface-container-low hover:bg-secondary-container hover:text-secondary text-text-muted transition-colors" onclick="openTicketDetailModal('TK-931', 'Red intermitente', 'Carlos Ruiz', 'B3 / S301', 'Baja', 'Asignado', 'Pérdida de paquetes en gateway secundario del Bloque 3. Asignado a ingeniero de telecomunicaciones para revisión de patch panel.')" title="Ver Detalle Técnico">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-md bg-surface-container-lowest border-t border-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2 text-text-muted font-body-sm text-body-sm">
+<span>Mostrando <b class="text-text-primary">1-3</b> de <b class="text-text-primary">48</b> reportes registrados</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="p-1.5 rounded-lg bg-surface-container-low text-text-muted hover:bg-surface-container-high disabled:opacity-40 transition-colors" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-7 h-7 rounded-lg bg-campus-emerald-medium text-on-primary font-label-xs text-label-xs font-bold">1</button>
+<button class="w-7 h-7 rounded-lg bg-surface-container-low text-on-surface font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-7 h-7 rounded-lg bg-surface-container-low text-on-surface font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">3</button>
+<span class="px-1 text-text-muted text-label-xs">...</span>
+<button class="w-7 h-7 rounded-lg bg-surface-container-low text-on-surface font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">16</button>
+<button class="p-1.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Resolution Diagnostic Banner -->
+<div class="bg-gradient-to-r from-campus-surface-alt via-surface-container-lowest to-surface-container-low p-space-md rounded-xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-campus-emerald-dark">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg font-bold text-text-primary">Protocolo de Cierre Automático Activo</h4>
+<p class="font-body-sm text-body-sm text-text-muted">Los tickets resueltos son archivados tras 72h con feedback docente completado.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-xs text-label-xs font-bold text-campus-emerald-medium bg-secondary-container/40 px-3 py-1 rounded-full">SLA Campus: 94.8%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL: Technical Ticket Detail Inspection (Level 3 Elevation) -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-on-background/40 backdrop-blur-sm transition-opacity" id="ticket-modal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden flex flex-col transform transition-all">
+<!-- Modal Header -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-campus-emerald-medium"></span>
+<span class="font-label-xs text-label-xs uppercase font-bold text-text-muted" id="modal-ticket-id">TK-942</span>
+<span class="text-outline-variant font-label-xs">/</span>
+<span class="font-label-xs text-label-xs uppercase font-bold text-priority-high-red bg-error-container px-2 py-0.5 rounded" id="modal-ticket-priority">Alta</span>
+</div>
+<button class="p-1.5 rounded-lg text-text-muted hover:bg-surface-container-high transition-colors" onclick="closeTicketDetailModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-space-lg flex flex-col gap-space-md max-h-[819px] overflow-y-auto">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary" id="modal-ticket-title">PC 05 no da video</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5" id="modal-ticket-sub">Reportado en B1 / S204 por Juan Pérez</p>
+</div>
+<!-- Diagnostic Photo Inset -->
+<div class="relative rounded-xl overflow-hidden bg-surface-container-high h-48 w-full group">
+<img class="w-full h-full object-cover" data-alt="Technical diagnostic view of open desktop motherboard in computer lab with technician tools and flashlight inspecting memory bank" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0DcBwyui-7yp0w7Wyy4eBxuGfCCEyLbOXcoSriYWF--1IRpqXI7PJ2BJ_-Bj7Cg6WYs6RtXIYroLe3XR0-cxDGuYb3G2Pxdq57e65OZTQ04GM3T5gD_1-Uy8q5Xz0b16PGJ5vJPv72lXAjm_lIKDFIfLuCvs0Q-7X697w6O693jYiCvl0C9SYgepWr3qZ3KkqxlWZUwDSX_Xo-98ZGk2pDhDNYLWs409gPJyrn9g"/>
+<div class="absolute bottom-2 left-2 bg-on-background/70 backdrop-blur-md px-2.5 py-1 rounded-md text-on-primary font-label-xs text-label-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">photo_camera</span>
+<span>Evidencia del Usuario Adjunta</span>
+</div>
+</div>
+<!-- Description Box -->
+<div class="flex flex-col gap-1">
+<span class="font-label-xs text-label-xs text-text-muted uppercase font-bold">Descripción del Daño</span>
+<p class="font-body-md text-body-md text-text-primary bg-surface-container-low p-space-sm rounded-lg" id="modal-ticket-desc">
+            La pantalla se queda en negro tras encendido. El ventilador opera a máxima velocidad pero no hay salida HDMI ni DisplayPort.
+          </p>
+</div>
+<!-- Technical Feedback Bubble (Design System Component) -->
+<div class="bg-secondary-container/30 rounded-xl p-space-md flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-campus-emerald-dark font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span>Respuesta de Soporte Técnico</span>
+</div>
+<span class="font-label-xs text-label-xs text-campus-emerald-medium font-bold">Nivel 2 Soporte</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary">
+            Técnico en ruta con cable HDMI certificado y tarjeta de diagnóstico PCIe. Tiempo estimado de reposición: 45 min.
+          </p>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="px-4 py-2 rounded-xl text-text-muted hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="closeTicketDetailModal()">
+          Cerrar
+        </button>
+<button class="px-4 py-2 rounded-xl bg-campus-emerald-dark hover:bg-campus-emerald-medium text-on-primary font-label-md text-label-md transition-colors flex items-center gap-1.5" onclick="simulateResolution()">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Marcar como Resuelto</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 hidden bg-surface-container-lowest shadow-xl rounded-xl p-3.5 flex items-center gap-3 border-l-4 border-campus-emerald-medium transition-all" id="toast-notification">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-campus-emerald-dark flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" id="toast-icon">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-primary font-bold" id="toast-title">Filtros Aplicados</span>
+<span class="font-body-sm text-body-sm text-text-muted" id="toast-msg">Se encontraron 3 tickets que coinciden.</span>
+</div>
+</div>
+</div>
+<script>
+  // Filter Interactive Chips
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.classList.remove('bg-campus-emerald-medium', 'text-on-primary', 'shadow-xs');
+        c.classList.add('bg-surface-container-low', 'text-text-muted');
+      });
+      chip.classList.add('bg-campus-emerald-medium', 'text-on-primary', 'shadow-xs');
+      chip.classList.remove('bg-surface-container-low', 'text-text-muted');
+      showToast('Filtro de Estado', 'Filtrando por: ' + chip.innerText);
+    });
+  });
+
+  // Apply Filter Button
+  const btnApply = document.getElementById('btn-submit-filter');
+  if (btnApply) {
+    btnApply.addEventListener('click', () => {
+      const block = document.getElementById('filter-block').value;
+      const user = document.getElementById('filter-user').value;
+      const room = document.getElementById('filter-room').value;
+      
+      btnApply.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>Filtrando...</span>';
+      
+      setTimeout(() => {
+        btnApply.innerHTML = '<span class="material-symbols-outlined text-[20px]">filter_list</span><span>Aplicar Filtros</span>';
+        showToast('Filtros Actualizados', 'Mostrando resultados para ' + (block !== 'all' ? block : 'todos los bloques'));
+      }, 400);
+    });
+  }
+
+  // Reset Filters
+  const btnReset = document.getElementById('btn-reset-filters');
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      document.getElementById('filter-user').value = '';
+      document.getElementById('filter-block').value = 'all';
+      document.getElementById('filter-room').value = 'all';
+      document.getElementById('filter-equipment').value = 'all';
+      showToast('Filtros Restablecidos', 'Criterios de búsqueda reiniciados.');
+    });
+  }
+
+  // Export Action
+  const btnExport = document.getElementById('btn-export');
+  if (btnExport) {
+    btnExport.addEventListener('click', () => {
+      showToast('Generando Reporte', 'Descargando reporte en formato PDF/Excel...');
+    });
+  }
+
+  // Modal Technical Inspector Handlers
+  window.openTicketDetailModal = function(id, title, user, location, priority, status, desc) {
+    const modal = document.getElementById('ticket-modal');
+    document.getElementById('modal-ticket-id').innerText = id;
+    document.getElementById('modal-ticket-title').innerText = title;
+    document.getElementById('modal-ticket-sub').innerText = 'Reportado en ' + location + ' por ' + user;
+    document.getElementById('modal-ticket-desc').innerText = desc;
+    document.getElementById('modal-ticket-priority').innerText = priority;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  };
+
+  window.closeTicketDetailModal = function() {
+    const modal = document.getElementById('ticket-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  };
+
+  window.simulateResolution = function() {
+    closeTicketDetailModal();
+    showToast('Ticket Actualizado', 'Estado cambiado a "Resuelto" con éxito.');
+  };
+
+  // Toast Functionality
+  function showToast(title, msg) {
+    const toast = document.getElementById('toast-notification');
+    document.getElementById('toast-title').innerText = title;
+    document.getElementById('toast-msg').innerText = msg;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3200);
+  }
+</script></main></div></body></html>
