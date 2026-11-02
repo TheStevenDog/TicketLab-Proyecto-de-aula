@@ -171,6 +171,27 @@
       "creadoEn": 1792850939814,
       "asignadoPor": "admin@ticketlab.com",
       "actualizadoEn": 1792851414418
+    },
+    {
+      "id": "tkt_local_1793588631072",
+      "titulo": "Y8ftidjdt",
+      "descripcion": "Bici",
+      "bloque": "Bloque 1",
+      "sala": "Ryfuc",
+      "tipoEquipo": "Computador",
+      "prioridad": "alta",
+      "estado": "pendiente",
+      "fechaReporte": "2026-11-02",
+      "fechaLimite": "57",
+      "creadorUid": "usr_soporte_1",
+      "creadorNombre": "Andrés Técnico",
+      "creadorEmail": "soporte@ticketlab.com",
+      "tecnicoUid": null,
+      "tecnicoNombre": null,
+      "tecnicoEmail": null,
+      "respuestaTecnica": "",
+      "fotoBase64": "",
+      "creadoEn": 1793588648177
     }
   ]
 }

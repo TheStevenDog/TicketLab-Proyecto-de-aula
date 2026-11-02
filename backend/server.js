@@ -49,8 +49,20 @@ function obtenerIpLocal() {
   return candidatas[0] ? candidatas[0].ip : 'localhost';
 }
 
-// 2. Lee el cuerpo JSON de una petición (soporta fotos Base64 tomadas con la cámara)
+// 2. Lee el cuerpo JSON de una petición (soporta fotos Base64 tomadas con la cámara y entornos Serverless como Vercel)
 function leerCuerpoJson(req) {
+  // En Vercel Serverless, req.body ya viene pre-parseado
+  if (req.body && typeof req.body === 'object') {
+    return Promise.resolve(req.body);
+  }
+  if (typeof req.body === 'string' && req.body.trim()) {
+    try {
+      return Promise.resolve(JSON.parse(req.body));
+    } catch (e) {
+      return Promise.resolve({});
+    }
+  }
+
   return new Promise((resolve) => {
     let cuerpo = '';
     req.on('data', (trozo) => {
@@ -65,6 +77,8 @@ function leerCuerpoJson(req) {
         resolve({});
       }
     });
+    // Si la petición ya terminó o no emite datos (seguro para serverless)
+    req.on('error', () => resolve({}));
   });
 }
 
@@ -108,8 +122,15 @@ async function manejadorPrincipal(req, res) {
     return responderJson(res, 200, { ok: true });
   }
 
-  const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const ruta = urlObj.pathname;
+  // En Vercel Serverless con rewrite, req.originalUrl contiene la ruta solicitada original (/api/...)
+  const rutaCompleta = req.originalUrl || req.url || '/';
+  const urlObj = new URL(rutaCompleta, `http://${req.headers.host || 'localhost'}`);
+  let ruta = urlObj.pathname;
+
+  // Normalizar ruta si Vercel pasa el prefijo del archivo de destino
+  if (ruta.startsWith('/backend/server.js')) {
+    ruta = ruta.replace('/backend/server.js', '') || '/';
+  }
   const metodo = req.method;
 
   try {
@@ -248,7 +269,8 @@ const servidor = http.createServer(manejadorPrincipal);
 
 // 6. Arranco el servidor API + Web si se ejecuta localmente (en Vercel exportamos el handler)
 if (process.env.VERCEL) {
-  conectarServicioFirebase();
+  // En Vercel no bloqueamos el inicio de la función serverless
+  conectarServicioFirebase().catch(() => {});
 } else {
   servidor.listen(PUERTO, '0.0.0.0', () => {
     const ipLocal = obtenerIpLocal();
@@ -265,7 +287,7 @@ if (process.env.VERCEL) {
     console.log('💻 Plataforma Web en PC: http://localhost:' + PUERTO);
     console.log('📱 URL para App Móvil:   http://' + ipLocal + ':' + PUERTO);
     console.log('====================================================');
-    conectarServicioFirebase();
+    conectarServicioFirebase().catch(() => {});
   });
 }
 

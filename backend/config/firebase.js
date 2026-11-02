@@ -34,7 +34,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // Archivo de respaldo local para garantizar disponibilidad y rapidez en clase
-const RUTA_RESPALDO = path.join(__dirname, '..', 'datos', 'respaldo.json');
+// En Vercel (Serverless / AWS Lambda) el sistema de archivos principal es de solo lectura, por lo que usamos /tmp
+const RUTA_RESPALDO = process.env.VERCEL
+  ? path.join(require('os').tmpdir(), 'respaldo.json')
+  : path.join(__dirname, '..', 'datos', 'respaldo.json');
 
 const DATOS_INICIALES = {
   usuarios: [
