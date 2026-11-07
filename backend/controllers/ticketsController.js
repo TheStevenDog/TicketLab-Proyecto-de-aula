@@ -43,9 +43,8 @@ function crearTicket(usuarioToken, cuerpo) {
   const prioridad = ['baja', 'media', 'alta'].includes(cuerpo.prioridad)
     ? cuerpo.prioridad
     : 'media';
-  const fechaReporte =
-    (cuerpo.fechaReporte || '').trim() || new Date().toISOString().slice(0, 10);
-  const fechaLimite = (cuerpo.fechaLimite || '').trim();
+  const fechaFalla =
+    (cuerpo.fechaFalla || cuerpo.fechaReporte || '').trim() || new Date().toISOString().slice(0, 10);
   const fotoBase64 = cuerpo.fotoBase64 || '';
 
   if (!titulo || !descripcion || !bloque || !sala) {
@@ -66,8 +65,8 @@ function crearTicket(usuarioToken, cuerpo) {
     tipoEquipo,
     prioridad,
     estado: 'pendiente',
-    fechaReporte,
-    fechaLimite,
+    fechaFalla,
+    fechaReporte: fechaFalla,
     creadorUid: usuarioToken.uid,
     creadorNombre: usuarioToken.nombre || usuarioToken.email.split('@')[0],
     creadorEmail: usuarioToken.email,

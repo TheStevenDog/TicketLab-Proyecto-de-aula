@@ -159,6 +159,11 @@ async function iniciarVistaAutenticada() {
     .getElementById('tabBtn_usuarios')
     .classList.toggle('oculto', usuarioActual.rol !== 'admin');
 
+  const inputFalla = document.getElementById('tktFechaFalla');
+  if (inputFalla && !inputFalla.value) {
+    inputFalla.value = new Date().toISOString().slice(0, 10);
+  }
+
   // Explicación contextual según el rol
   const textosAyuda = {
     estudiante:
@@ -284,7 +289,7 @@ async function crearTicketWeb() {
   const tipoEquipo = document.getElementById('tktTipoEquipo').value;
   const prioridad = document.getElementById('tktPrioridad').value;
   const descripcion = document.getElementById('tktDescripcion').value.trim();
-  const fechaLimite = document.getElementById('tktFechaLimite').value;
+  const fechaFalla = document.getElementById('tktFechaFalla')?.value || new Date().toISOString().slice(0, 10);
 
   try {
     await peticionApi('/api/tickets', 'POST', {
@@ -294,14 +299,17 @@ async function crearTicketWeb() {
       tipoEquipo,
       prioridad,
       descripcion,
-      fechaLimite,
+      fechaFalla,
+      fechaReporte: fechaFalla,
       fotoBase64: fotoCapturadaBase64,
     });
 
     document.getElementById('tktTitulo').value = '';
     document.getElementById('tktSala').value = '';
     document.getElementById('tktDescripcion').value = '';
-    document.getElementById('tktFechaLimite').value = '';
+    if (document.getElementById('tktFechaFalla')) {
+      document.getElementById('tktFechaFalla').value = new Date().toISOString().slice(0, 10);
+    }
     quitarFotoWeb();
 
     await cargarTicketsWeb();
@@ -381,12 +389,7 @@ function renderizarListaTickets(lista, contenedor, mostrarControles = true) {
             <div>
               <div class="flex items-center gap-2 mb-1">
                 <span class="text-[11px] font-extrabold text-slate-400 tracking-wider uppercase">${codigoCorto}</span>
-                <span class="text-[11px] text-slate-400">• ${t.fechaReporte || 'Hoy'}</span>
-                ${
-                  t.fechaLimite
-                    ? `<span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Límite: ${t.fechaLimite}</span>`
-                    : ''
-                }
+                <span class="text-[11px] text-slate-400">• Falla: ${t.fechaFalla || t.fechaReporte || 'Hoy'}</span>
               </div>
               <h4 class="font-headline text-base font-extrabold text-slate-900 leading-snug">${t.titulo}</h4>
             </div>

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import {
   Alert,
   FlatList,
+  KeyboardAvoidingView,
+  Platform,
   RefreshControl,
   StyleSheet,
   Text,
@@ -74,7 +76,11 @@ export default function ReportesScreen({ usuario, alVolver }) {
   const totalSalasConFalla = Object.keys(resumen.porSala || {}).length;
 
   return (
-    <View style={estilos.contenedor}>
+    <KeyboardAvoidingView
+      style={estilos.contenedor}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 0}
+    >
       <TouchableOpacity onPress={alVolver} style={estilos.btnVolver}>
         <Text style={estilos.txtVolver}>← Volver al Menú Principal</Text>
       </TouchableOpacity>
@@ -82,6 +88,9 @@ export default function ReportesScreen({ usuario, alVolver }) {
       <FlatList
         data={resultados}
         keyExtractor={(item) => item.id}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 60 }}
         refreshControl={
           <RefreshControl
             refreshing={recargando}
@@ -251,7 +260,7 @@ export default function ReportesScreen({ usuario, alVolver }) {
           <Text style={estilos.vacio}>No hay reportes que coincidan con estos filtros.</Text>
         }
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

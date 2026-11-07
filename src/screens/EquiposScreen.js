@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import {
   Alert,
   FlatList,
+  KeyboardAvoidingView,
+  Platform,
   RefreshControl,
   StyleSheet,
   Text,
@@ -95,10 +97,17 @@ export default function EquiposScreen({
   };
 
   return (
-    <View style={estilos.contenedor}>
+    <KeyboardAvoidingView
+      style={estilos.contenedor}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 0}
+    >
       <FlatList
         data={verRolesAdmin && usuario.rol === 'admin' ? usuariosSistema : equipos}
         keyExtractor={(item) => item.uid || item.id}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 60 }}
         refreshControl={
           <RefreshControl
             refreshing={recargando}
@@ -287,7 +296,7 @@ export default function EquiposScreen({
           );
         }}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ticketlab.campus",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.ticketlab.campus",
@@ -25,7 +29,8 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.READ_MEDIA_IMAGES"
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "plugins": [
@@ -39,6 +44,11 @@
     ],
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3b20ea92-b985-42a4-b87f-fb9b59462aa4"
+      }
     }
   }
 }

@@ -3,6 +3,8 @@ import {
   Alert,
   FlatList,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   RefreshControl,
   StyleSheet,
   Text,
@@ -31,7 +33,8 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
   const [sala, setSala] = useState('');
   const [tipoEquipo, setTipoEquipo] = useState('Computador');
   const [prioridad, setPrioridad] = useState('media');
-  const [fechaLimite, setFechaLimite] = useState('');
+  // Fecha en que se encontró la falla: se calcula y coloca automáticamente al crear el reporte
+  const [fechaFalla, setFechaFalla] = useState(new Date().toISOString().slice(0, 10));
   const [fotoBase64, setFotoBase64] = useState('');
   const [lista, setLista] = useState([]);
   const [tecnicos, setTecnicos] = useState([]);
@@ -85,6 +88,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
       return;
     }
 
+    const fechaAutomatica = fechaFalla.trim() || new Date().toISOString().slice(0, 10);
     const nuevoPayload = {
       idTemporal: 'tkt_local_' + Date.now(),
       titulo: titulo.trim(),
@@ -93,7 +97,8 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
       sala: sala.trim(),
       tipoEquipo,
       prioridad,
-      fechaLimite: fechaLimite.trim(),
+      fechaFalla: fechaAutomatica,
+      fechaReporte: fechaAutomatica,
       fotoBase64,
     };
 
@@ -106,7 +111,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
           estado: 'pendiente',
           creadorNombre: usuario.nombre,
           creadorEmail: usuario.email,
-          fechaReporte: new Date().toISOString().slice(0, 10),
+          fechaReporte: fechaAutomatica,
           sincronizado: false,
         },
         ...lista,
@@ -129,7 +134,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
     setTitulo('');
     setDescripcion('');
     setSala('');
-    setFechaLimite('');
+    setFechaFalla(new Date().toISOString().slice(0, 10));
     setFotoBase64('');
   };
 
@@ -190,7 +195,11 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
   };
 
   return (
-    <View style={estilos.contenedor}>
+    <KeyboardAvoidingView
+      style={estilos.contenedor}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 70 : 0}
+    >
       {/* Sub-barra de navegación Stitch */}
       <View style={estilos.barraSuperior}>
         <TouchableOpacity style={estilos.btnVolver} onPress={alVolver}>
@@ -209,6 +218,9 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
       <FlatList
         data={lista}
         keyExtractor={(item) => item.id}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={estilos.scrollList}
         refreshControl={
           <RefreshControl
             refreshing={recargando}
@@ -319,10 +331,10 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
               </View>
 
               <CampoTexto
-                etiqueta="Fecha Límite Estimada (YYYY-MM-DD)"
-                valor={fechaLimite}
-                alCambiar={setFechaLimite}
-                placeholder="2026-11-15"
+                etiqueta="Fecha en que se encontró la falla"
+                valor={fechaFalla}
+                alCambiar={setFechaFalla}
+                placeholder="YYYY-MM-DD"
               />
 
               {/* Módulo de Cámara e Imagen Stitch */}
@@ -356,13 +368,11 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
 
               <View style={estilos.cabeceraConteo}>
                 <Text style={estilos.subtituloLista}>Tickets Registrados ({lista.length})</Text>
-                <Text style={estilos.notaLongPress}>Mantén presionado para gestionar</Text>
               </View>
             </View>
           ) : (
             <View style={estilos.cabeceraConteo}>
               <Text style={estilos.subtituloLista}>Tickets Registrados ({lista.length})</Text>
-              <Text style={estilos.notaLongPress}>Mantén presionado para gestionar</Text>
             </View>
           )
         }
@@ -377,7 +387,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
         )}
         ListEmptyComponent={<Text style={estilos.vacio}>No hay tickets registrados.</Text>}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -495,6 +505,6 @@ const estilos = StyleSheet.create({
     marginBottom: 8,
   },
   subtituloLista: { fontSize: 15, fontWeight: '900', color: '#0f172a' },
-  notaLongPress: { fontSize: 10, color: '#64748b', fontWeight: '600' },
+  scrollList: { paddingBottom: 60 },
   vacio: { color: '#64748b', textAlign: 'center', marginTop: 20 },
 });

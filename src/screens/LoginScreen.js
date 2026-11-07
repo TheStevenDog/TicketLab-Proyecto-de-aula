@@ -63,7 +63,8 @@ export default function LoginScreen({ alAutenticar }) {
   return (
     <KeyboardAvoidingView
       style={estilos.contenedor}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}
     >
       {/* Barra superior Stitch: API Gateway Status */}
       <View style={estilos.barraGateway}>
@@ -74,7 +75,11 @@ export default function LoginScreen({ alAutenticar }) {
         <Text style={estilos.txtJwtSpec}>JWT HS256 · FIREBASE</Text>
       </View>
 
-      <ScrollView contentContainerStyle={estilos.scroll}>
+      <ScrollView
+        contentContainerStyle={estilos.scroll}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardShouldPersistTaps="handled"
+      >
         {/* Cabecera Institucional Stitch */}
         <View style={estilos.cabeceraMarca}>
           <View style={estilos.iconoEscudo}>

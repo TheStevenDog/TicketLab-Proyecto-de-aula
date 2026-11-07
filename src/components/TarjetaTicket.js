@@ -31,7 +31,7 @@ export default function TarjetaTicket({
       <View style={estilos.filaSuperior}>
         <View style={estilos.bloqueCodigo}>
           <Text style={estilos.codigoTxt}>{codigoCorto}</Text>
-          <Text style={estilos.fechaTxt}>• {ticket.fechaReporte || 'Hoy'}</Text>
+          <Text style={estilos.fechaTxt}>• Falla: {ticket.fechaFalla || ticket.fechaReporte || 'Hoy'}</Text>
         </View>
         <View style={estilos.filaBadges}>
           <View style={[estilos.badge, estilos['prio_' + (ticket.prioridad || 'media')]]}>
@@ -108,7 +108,7 @@ export default function TarjetaTicket({
         </Text>
       </View>
 
-      {/* Botón de Acción según Jerarquía (o mantener presionada la tarjeta) */}
+      {/* Botón de Acción según Jerarquía */}
       {(puedeAsignar || puedeGestionar) && (
         <TouchableOpacity
           style={estilos.btnAccionToggle}
@@ -117,7 +117,7 @@ export default function TarjetaTicket({
           <Text style={estilos.txtAccionToggle}>
             {mostrarGestion
               ? '▲ Ocultar panel de triaje'
-              : '⚙️ Gestionar / Asignar (Toca o mantén presionado)'}
+              : '⚙️ Gestionar / Asignar'}
           </Text>
         </TouchableOpacity>
       )}

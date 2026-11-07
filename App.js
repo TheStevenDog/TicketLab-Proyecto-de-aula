@@ -200,10 +200,6 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      <Text style={estilos.ayudaGestos}>
-        👆 Gestos Android: Desliza a los lados para cambiar pestaña · Hacia abajo para recargar · Botón Atrás
-      </Text>
-
       {avisoSync ? (
         <TouchableOpacity style={estilos.bannerExito} onPress={() => setAvisoSync('')}>
           <Text style={estilos.txtExito}>{avisoSync} (Toca para cerrar)</Text>
@@ -345,14 +341,6 @@ const estilos = StyleSheet.create({
   },
   txtTab: { fontSize: 11, fontWeight: '800', color: '#64748b' },
   txtTabActivo: { color: '#006a63' },
-  ayudaGestos: {
-    fontSize: 10,
-    color: '#475569',
-    textAlign: 'center',
-    backgroundColor: '#edeef0',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-  },
   bannerExito: { backgroundColor: '#9cf2e8', paddingVertical: 6, paddingHorizontal: 14 },
   txtExito: { color: '#00504a', fontSize: 11, fontWeight: '800', textAlign: 'center' },
   areaContenido: { flex: 1 },
