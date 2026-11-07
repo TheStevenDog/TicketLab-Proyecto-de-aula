@@ -13,19 +13,12 @@ import { cambiarUrlApi, guardarTokenJwt, llamarApi, obtenerUrlApi } from '../con
 import CampoTexto from '../components/CampoTexto';
 import Boton from '../components/Boton';
 
-const ROLES_DEMO = [
-  { clave: 'estudiante', nivel: 'NIVEL 1', titulo: 'Estudiante', icono: '🎓', correo: 'estudiante@ticketlab.com' },
-  { clave: 'soporte', nivel: 'NIVEL 2', titulo: 'Soporte', icono: '🛠️', correo: 'soporte@ticketlab.com' },
-  { clave: 'lider', nivel: 'NIVEL 3', titulo: 'Líder', icono: '📋', correo: 'lider@ticketlab.com' },
-  { clave: 'admin', nivel: 'NIVEL 4', titulo: 'Admin', icono: '👑', correo: 'admin@ticketlab.com' },
-];
-
 // Pantalla de Login y Registro con diseño Stitch ("Academic Operations & Technical Triage")
 export default function LoginScreen({ alAutenticar }) {
   const [modoRegistro, setModoRegistro] = useState(false);
   const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('estudiante@ticketlab.com');
-  const [clave, setClave] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [clave, setClave] = useState('');
   const [rolElegido, setRolElegido] = useState('estudiante');
   const [urlApi, setUrlApi] = useState(obtenerUrlApi());
   const [mostrarConfigRed, setMostrarConfigRed] = useState(false);
@@ -67,15 +60,6 @@ export default function LoginScreen({ alAutenticar }) {
     }
   };
 
-  // 3. Acceso directo de prueba para los 4 roles jerárquicos
-  const ingresarDemoRol = (itemRol) => {
-    setRolElegido(itemRol.clave);
-    setEmail(itemRol.correo);
-    setClave('123456');
-    setModoRegistro(false);
-    autenticarConApi(itemRol.correo, '123456', false);
-  };
-
   return (
     <KeyboardAvoidingView
       style={estilos.contenedor}
@@ -106,37 +90,6 @@ export default function LoginScreen({ alAutenticar }) {
             <Text style={estilos.subtitulo}>
               Academic Operations & Technical Triage · API Node.js + JWT
             </Text>
-          </View>
-        </View>
-
-        {/* Matriz de 4 Roles Jerárquicos (DEMO / EVAL) */}
-        <View style={estilos.cajaDemos}>
-          <View style={estilos.cabeceraDemos}>
-            <Text style={estilos.tituloDemos}>⚡ ACCESO RÁPIDO POR JERARQUÍA (CLAVE: 123456)</Text>
-            <View style={estilos.pillDemo}>
-              <Text style={estilos.pillDemoTxt}>DEMO / EVAL</Text>
-            </View>
-          </View>
-
-          <View style={estilos.gridRolesDemo}>
-            {ROLES_DEMO.map((item) => {
-              const activo = rolElegido === item.clave;
-              return (
-                <TouchableOpacity
-                  key={item.clave}
-                  style={[estilos.tarjetaRolDemo, activo && estilos.tarjetaRolDemoActiva]}
-                  onPress={() => ingresarDemoRol(item)}
-                >
-                  <Text style={estilos.iconoRolDemo}>{item.icono}</Text>
-                  <Text style={[estilos.nivelRolDemo, activo && estilos.txtBlanco]}>
-                    {item.nivel}
-                  </Text>
-                  <Text style={[estilos.nombreRolDemo, activo && estilos.txtBlanco]}>
-                    {item.titulo}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
           </View>
         </View>
 

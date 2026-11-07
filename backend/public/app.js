@@ -39,7 +39,16 @@ async function peticionApi(ruta, metodo = 'GET', cuerpo = null) {
   if (cuerpo) opciones.body = JSON.stringify(cuerpo);
 
   const respuesta = await fetch(ruta, opciones);
-  const datos = await respuesta.json();
+  const texto = await respuesta.text();
+  let datos;
+  try {
+    datos = JSON.parse(texto);
+  } catch (e) {
+    if (texto.includes('login') || texto.includes('Sign In') || respuesta.status === 401 || respuesta.status === 403) {
+      throw new Error('Vercel tiene activada la protección de despliegue ("Deployment Protection"). Desactívala en Settings > Deployment Protection de Vercel para permitir peticiones públicas.');
+    }
+    throw new Error(texto.slice(0, 180) || 'Error en la petición a la API');
+  }
   if (!respuesta.ok) {
     throw new Error(datos.error || 'Error en la petición a la API');
   }
