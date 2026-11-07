@@ -3,21 +3,27 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Permite conexión tras proxy/
 
 const fs = require('fs');
 const path = require('path');
-const { initializeApp } = require('firebase/app');
-const {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} = require('firebase/auth');
-const {
-  getFirestore,
-  collection,
-  doc,
-  setDoc,
-  addDoc,
-  getDocs,
-  updateDoc,
-} = require('firebase/firestore');
+// Importación compatible tanto con bundle estándar como con Vercel Serverless
+let initializeApp;
+try {
+  ({ initializeApp } = require('firebase/app'));
+} catch (e) {
+  ({ initializeApp } = require('@firebase/app'));
+}
+
+let getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword;
+try {
+  ({ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('firebase/auth'));
+} catch (e) {
+  ({ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('@firebase/auth'));
+}
+
+let getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc;
+try {
+  ({ getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc } = require('firebase/firestore'));
+} catch (e) {
+  ({ getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc } = require('@firebase/firestore'));
+}
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAsfkeHXYKCeQRt-v7G39pPD_kYY2KDGe4',
