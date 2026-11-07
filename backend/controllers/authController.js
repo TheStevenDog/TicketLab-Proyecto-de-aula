@@ -1,7 +1,8 @@
 // Controlador de Autenticación (JWT), Usuarios, Roles y Equipos de Soporte
-const { createUserWithEmailAndPassword, signInWithEmailAndPassword } = require('firebase/auth');
 const {
   auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   leerDatosLocales,
   guardarDatosLocales,
   replicarEnFirestore,

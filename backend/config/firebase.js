@@ -3,26 +3,24 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Permite conexión tras proxy/
 
 const fs = require('fs');
 const path = require('path');
-// Importación compatible tanto con bundle estándar como con Vercel Serverless
-let initializeApp;
+
+// Carga tolerante a fallos del SDK de Firebase (funciona tanto en Node local como en Vercel Serverless)
+let initializeApp = null;
+let getAuth = null;
+let signInWithEmailAndPassword = null;
+let createUserWithEmailAndPassword = null;
+let getFirestore = null;
+let collection = null;
+let doc = null;
+let setDoc = null;
+let getDocs = null;
+
 try {
   ({ initializeApp } = require('firebase/app'));
-} catch (e) {
-  ({ initializeApp } = require('@firebase/app'));
-}
-
-let getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword;
-try {
   ({ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('firebase/auth'));
+  ({ getFirestore, collection, doc, setDoc, getDocs } = require('firebase/firestore'));
 } catch (e) {
-  ({ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('@firebase/auth'));
-}
-
-let getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc;
-try {
-  ({ getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc } = require('firebase/firestore'));
-} catch (e) {
-  ({ getFirestore, collection, doc, setDoc, addDoc, getDocs, updateDoc } = require('@firebase/firestore'));
+  // En entornos Serverless donde no se empaquete el cliente ESM de firebase, opera con el motor JSON integrado
 }
 
 const firebaseConfig = {
@@ -34,10 +32,19 @@ const firebaseConfig = {
   appId: '1:195941715567:web:7e52bc95cee550ecad079a',
 };
 
-// 1. Inicializo Firebase en el servidor Node.js
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// 1. Inicializo Firebase en el servidor Node.js si el SDK está disponible
+let app = null;
+let auth = null;
+let db = null;
+try {
+  if (initializeApp && getAuth && getFirestore) {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+  }
+} catch (e) {
+  // Continúa con el motor de datos integrado
+}
 
 // Archivo de respaldo local para garantizar disponibilidad y rapidez en clase
 // En Vercel (Serverless / AWS Lambda) el sistema de archivos principal es de solo lectura, por lo que usamos /tmp
@@ -178,6 +185,7 @@ function guardarDatosLocales(datos) {
 // 3. Autentica el servicio backend con Firebase para tener permiso en Firestore
 let firebaseConectado = false;
 async function conectarServicioFirebase() {
+  if (!auth || !signInWithEmailAndPassword) return;
   try {
     await signInWithEmailAndPassword(auth, 'admin@ticketlab.com', '123456').catch(() =>
       createUserWithEmailAndPassword(auth, 'admin@ticketlab.com', '123456')
@@ -250,6 +258,8 @@ async function replicarEnFirestore(nombreColeccion, idDoc, datosDoc) {
 module.exports = {
   auth,
   db,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   leerDatosLocales,
   guardarDatosLocales,
   conectarServicioFirebase,

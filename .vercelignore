@@ -1,7 +1,0 @@
-# Ignorar archivos y carpetas de la app móvil en Vercel
-App.js
-app.json
-assets/
-src/
-scripts/
-stitch_ticketlab_campus_design_system/

@@ -4,21 +4,19 @@ import Constants from 'expo-constants';
 import { SERVIDOR_API_URL } from './servidorUrl';
 
 function detectarUrlInicial() {
-  if (Platform.OS === 'web' && typeof window !== 'undefined') {
-    return `http://${window.location.hostname || 'localhost'}:3000`;
-  }
-  // En Expo Go en celular, tomamos automáticamente la IP de la laptop desde hostUri
-  const hostUri =
-    Constants.expoConfig?.hostUri ||
-    Constants.manifest2?.extra?.expoClient?.hostUri ||
-    '';
-  if (hostUri && hostUri.includes(':')) {
-    const ipLaptop = hostUri.split(':')[0];
-    if (ipLaptop && !ipLaptop.includes('exp.direct')) {
-      return `http://${ipLaptop}:3000`;
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && window.location?.origin) {
+    if (window.location.hostname.includes('vercel.app')) {
+      return window.location.origin;
     }
   }
-  return SERVIDOR_API_URL || 'http://localhost:3000';
+  // En celular (Expo Go o APK) conectamos directamente al servidor desplegado en Vercel
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL.replace(/\/+$/, '');
+  }
+  if (SERVIDOR_API_URL) {
+    return SERVIDOR_API_URL.replace(/\/+$/, '');
+  }
+  return 'https://ticket-lab-git-main-thestevendogs-projects.vercel.app';
 }
 
 let urlBase = detectarUrlInicial();
