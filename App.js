@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   Alert,
+  Animated,
   BackHandler,
   PanResponder,
   StyleSheet,
@@ -34,6 +35,32 @@ export default function App() {
   const [conectado, setConectado] = useState(true);
   const [pendientesOffline, setPendientesOffline] = useState([]);
   const [avisoSync, setAvisoSync] = useState('');
+
+  // Animaciones nativas para transiciones de pantalla y pulso de red
+  const animPantalla = useRef(new Animated.Value(1)).current;
+  const animPulso = useRef(new Animated.Value(1)).current;
+
+  // Transición suave (fade + slide-up) al cambiar entre pestañas
+  useEffect(() => {
+    animPantalla.setValue(0);
+    Animated.timing(animPantalla, {
+      toValue: 1,
+      duration: 220,
+      useNativeDriver: true,
+    }).start();
+  }, [pantalla]);
+
+  // Pulso continuo del indicador de estado de red
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(animPulso, { toValue: 0.35, duration: 850, useNativeDriver: true }),
+        Animated.timing(animPulso, { toValue: 1, duration: 850, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, []);
 
   // Referencia actualizada para usar dentro de los listeners de gestos de Android
   const estadoRef = useRef({ usuario, pantalla });
@@ -137,7 +164,13 @@ export default function App() {
       {/* 1. Barra Superior de Estado de Red / Cola Offline (Stitch Status Strip) */}
       <View style={[estilos.barraRed, conectado ? estilos.barraOnline : estilos.barraOffline]}>
         <View style={estilos.filaIndicadorRed}>
-          <View style={[estilos.puntoEstado, conectado ? estilos.puntoVerde : estilos.puntoAmbar]} />
+          <Animated.View
+            style={[
+              estilos.puntoEstado,
+              conectado ? estilos.puntoVerde : estilos.puntoAmbar,
+              { opacity: animPulso },
+            ]}
+          />
           <Text style={estilos.txtRed} numberOfLines={1}>
             {conectado
               ? `Conectado (API JWT) · Cola (${pendientesOffline.length})`
@@ -206,8 +239,23 @@ export default function App() {
         </TouchableOpacity>
       ) : null}
 
-      {/* 4. Contenido de la Pantalla Activa */}
-      <View style={estilos.areaContenido}>
+      {/* 4. Contenido de la Pantalla Activa con Transición Suave */}
+      <Animated.View
+        style={[
+          estilos.areaContenido,
+          {
+            opacity: animPantalla,
+            transform: [
+              {
+                translateY: animPantalla.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [10, 0],
+                }),
+              },
+            ],
+          },
+        ]}
+      >
         {pantalla === 'tickets' && (
           <TicketsScreen
             usuario={usuario}
@@ -231,7 +279,7 @@ export default function App() {
             alIrAReportes={() => setPantalla('reportes')}
           />
         )}
-      </View>
+      </Animated.View>
 
       {/* 5. Barra de Navegación Inferior Stitch (Bottom Nav Shell) */}
       <View style={estilos.barraInferior}>

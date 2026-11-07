@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-// Tarjeta de Ticket con diseño Stitch ("Academic Operations & Technical Triage") y soporte de LongPress
+// Tarjeta de Ticket con diseño Stitch ("Academic Operations & Technical Triage") y animación de entrada
 export default function TarjetaTicket({
   ticket,
   rolUsuario,
@@ -11,6 +11,15 @@ export default function TarjetaTicket({
 }) {
   const [respuesta, setRespuesta] = useState(ticket.respuestaTecnica || '');
   const [mostrarGestion, setMostrarGestion] = useState(false);
+  const animEntrada = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(animEntrada, {
+      toValue: 1,
+      duration: 240,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const puedeAsignar = rolUsuario === 'lider' || rolUsuario === 'admin';
   const puedeGestionar =
@@ -20,13 +29,28 @@ export default function TarjetaTicket({
   const estadoClave = ticket.estado || 'pendiente';
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.95}
-      onLongPress={() => {
-        if (puedeAsignar || puedeGestionar) setMostrarGestion(!mostrarGestion);
-      }}
-      style={estilos.tarjeta}
+    <Animated.View
+      style={[
+        estilos.tarjeta,
+        {
+          opacity: animEntrada,
+          transform: [
+            {
+              translateY: animEntrada.interpolate({
+                inputRange: [0, 1],
+                outputRange: [12, 0],
+              }),
+            },
+          ],
+        },
+      ]}
     >
+      <TouchableOpacity
+        activeOpacity={0.95}
+        onLongPress={() => {
+          if (puedeAsignar || puedeGestionar) setMostrarGestion(!mostrarGestion);
+        }}
+      >
       {/* Cabecera de Tarjeta Stitch: Código + Prioridad + Estado */}
       <View style={estilos.filaSuperior}>
         <View style={estilos.bloqueCodigo}>
@@ -181,7 +205,8 @@ export default function TarjetaTicket({
           )}
         </View>
       )}
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Animated.View>
   );
 }
 

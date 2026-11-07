@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Alert,
+  Animated,
   FlatList,
   Image,
   KeyboardAvoidingView,
@@ -40,6 +41,41 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
   const [tecnicos, setTecnicos] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(true);
   const [recargando, setRecargando] = useState(false);
+
+  // Animaciones para foto de evidencia y despliegue del formulario
+  const animFoto = useRef(new Animated.Value(0)).current;
+  const animForm = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    if (fotoBase64) {
+      animFoto.setValue(0.75);
+      Animated.spring(animFoto, {
+        toValue: 1,
+        friction: 6,
+        tension: 40,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [fotoBase64]);
+
+  const alternarFormulario = () => {
+    if (mostrarFormulario) {
+      Animated.timing(animForm, {
+        toValue: 0,
+        duration: 180,
+        useNativeDriver: true,
+      }).start(() => setMostrarFormulario(false));
+    } else {
+      setMostrarFormulario(true);
+      animForm.setValue(0);
+      Animated.spring(animForm, {
+        toValue: 1,
+        friction: 7,
+        tension: 40,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
 
   // 1. Cargo tickets y técnicos desde la API al entrar o al reconectar internet
   useEffect(() => {
@@ -207,7 +243,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={estilos.btnToggleForm}
-          onPress={() => setMostrarFormulario(!mostrarFormulario)}
+          onPress={alternarFormulario}
         >
           <Text style={estilos.toggleForm}>
             {mostrarFormulario ? '▲ Ocultar Formulario' : '➕ Nuevo Reporte'}
@@ -230,7 +266,22 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
         }
         ListHeaderComponent={
           mostrarFormulario ? (
-            <View style={estilos.formulario}>
+            <Animated.View
+              style={[
+                estilos.formulario,
+                {
+                  opacity: animForm,
+                  transform: [
+                    {
+                      scale: animForm.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.96, 1],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
               <View style={estilos.cabeceraForm}>
                 <View>
                   <Text style={estilos.tituloForm}>Reportar Daño</Text>
@@ -349,7 +400,15 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
               </View>
 
               {fotoBase64 ? (
-                <View style={estilos.contenedorPreview}>
+                <Animated.View
+                  style={[
+                    estilos.contenedorPreview,
+                    {
+                      opacity: animFoto,
+                      transform: [{ scale: animFoto }],
+                    },
+                  ]}
+                >
                   <Image source={{ uri: fotoBase64 }} style={estilos.previewFoto} />
                   <TouchableOpacity
                     style={estilos.btnCerrarFoto}
@@ -357,7 +416,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
                   >
                     <Text style={estilos.txtCerrarFoto}>✕</Text>
                   </TouchableOpacity>
-                </View>
+                </Animated.View>
               ) : null}
 
               <Boton
@@ -369,7 +428,7 @@ export default function TicketsScreen({ usuario, conectado, alVolver }) {
               <View style={estilos.cabeceraConteo}>
                 <Text style={estilos.subtituloLista}>Tickets Registrados ({lista.length})</Text>
               </View>
-            </View>
+            </Animated.View>
           ) : (
             <View style={estilos.cabeceraConteo}>
               <Text style={estilos.subtituloLista}>Tickets Registrados ({lista.length})</Text>

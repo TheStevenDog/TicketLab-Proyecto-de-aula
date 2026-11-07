@@ -1,15 +1,43 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useRef } from 'react';
+import { Animated, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
 
-// Botón reutilizable con estilo Stitch Campus IT (Esmeralda Institucional por defecto)
+// Botón animado interactivo con micro-efecto de pulsación elástica (Stitch Campus IT)
 export default function Boton({ texto, alPresionar, color = '#006a63' }) {
+  const escala = useRef(new Animated.Value(1)).current;
+
+  const presionarDentro = () => {
+    Animated.spring(escala, {
+      toValue: 0.96,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 4,
+    }).start();
+  };
+
+  const presionarFuera = () => {
+    Animated.spring(escala, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 40,
+      bounciness: 6,
+    }).start();
+  };
+
   return (
-    <TouchableOpacity
-      activeOpacity={0.88}
-      style={[estilos.boton, { backgroundColor: color }]}
+    <TouchableWithoutFeedback
+      onPressIn={presionarDentro}
+      onPressOut={presionarFuera}
       onPress={alPresionar}
     >
-      <Text style={estilos.texto}>{texto}</Text>
-    </TouchableOpacity>
+      <Animated.View
+        style={[
+          estilos.boton,
+          { backgroundColor: color, transform: [{ scale: escala }] },
+        ]}
+      >
+        <Text style={estilos.texto}>{texto}</Text>
+      </Animated.View>
+    </TouchableWithoutFeedback>
   );
 }
 

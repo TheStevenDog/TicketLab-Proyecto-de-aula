@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Alert,
+  Animated,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -22,6 +23,28 @@ export default function LoginScreen({ alAutenticar }) {
   const [rolElegido, setRolElegido] = useState('estudiante');
   const [urlApi, setUrlApi] = useState(obtenerUrlApi());
   const [mostrarConfigRed, setMostrarConfigRed] = useState(false);
+
+  // Animaciones de entrada suave y pulso de estado
+  const animEntrada = useRef(new Animated.Value(0)).current;
+  const animGateway = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.spring(animEntrada, {
+      toValue: 1,
+      friction: 7,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(animGateway, { toValue: 0.35, duration: 800, useNativeDriver: true }),
+        Animated.timing(animGateway, { toValue: 1, duration: 800, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, []);
 
   // 1. Valida los datos antes de consultar la API
   const validar = (correo = email, pass = clave) => {
@@ -69,7 +92,7 @@ export default function LoginScreen({ alAutenticar }) {
       {/* Barra superior Stitch: API Gateway Status */}
       <View style={estilos.barraGateway}>
         <View style={estilos.filaGateway}>
-          <View style={estilos.puntoOnline} />
+          <Animated.View style={[estilos.puntoOnline, { opacity: animGateway }]} />
           <Text style={estilos.txtGateway}>API GATEWAY: ONLINE</Text>
         </View>
         <Text style={estilos.txtJwtSpec}>JWT HS256 · FIREBASE</Text>
@@ -80,26 +103,40 @@ export default function LoginScreen({ alAutenticar }) {
         automaticallyAdjustKeyboardInsets={true}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Cabecera Institucional Stitch */}
-        <View style={estilos.cabeceraMarca}>
-          <View style={estilos.iconoEscudo}>
-            <Text style={estilos.iconoEscudoTxt}>🏛️</Text>
-          </View>
-          <View style={{ flex: 1 }}>
-            <View style={estilos.filaNombreApp}>
-              <Text style={estilos.titulo}>TicketLab</Text>
-              <View style={estilos.badgeCampus}>
-                <Text style={estilos.badgeCampusTxt}>CAMPUS IT</Text>
-              </View>
+        {/* Contenedor animado con entrada suave (fade + slide-up) */}
+        <Animated.View
+          style={{
+            opacity: animEntrada,
+            transform: [
+              {
+                translateY: animEntrada.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [18, 0],
+                }),
+              },
+            ],
+          }}
+        >
+          {/* Cabecera Institucional Stitch */}
+          <View style={estilos.cabeceraMarca}>
+            <View style={estilos.iconoEscudo}>
+              <Text style={estilos.iconoEscudoTxt}>🏛️</Text>
             </View>
-            <Text style={estilos.subtitulo}>
-              Academic Operations & Technical Triage · API Node.js + JWT
-            </Text>
+            <View style={{ flex: 1 }}>
+              <View style={estilos.filaNombreApp}>
+                <Text style={estilos.titulo}>TicketLab</Text>
+                <View style={estilos.badgeCampus}>
+                  <Text style={estilos.badgeCampusTxt}>CAMPUS IT</Text>
+                </View>
+              </View>
+              <Text style={estilos.subtitulo}>
+                Academic Operations & Technical Triage · API Node.js + JWT
+              </Text>
+            </View>
           </View>
-        </View>
 
-        {/* Tarjeta Principal de Autenticación JWT */}
-        <View style={estilos.tarjetaAuth}>
+          {/* Tarjeta Principal de Autenticación JWT */}
+          <View style={estilos.tarjetaAuth}>
           {/* Selector segmentado Iniciar Sesión / Crear Cuenta */}
           <View style={estilos.selectorModo}>
             <TouchableOpacity
@@ -207,6 +244,7 @@ export default function LoginScreen({ alAutenticar }) {
             />
           </View>
         )}
+        </Animated.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
