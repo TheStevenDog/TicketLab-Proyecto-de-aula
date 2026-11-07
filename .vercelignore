@@ -1,6 +1,5 @@
 # Ignorar archivos y carpetas de la app móvil en Vercel
 App.js
-index.js
 app.json
 assets/
 src/
